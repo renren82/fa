@@ -109,7 +109,7 @@ def v_ta(file_path):
 """
 main start
 """
-ts.set_token('2e2ec7b610512cc2704e3aa692711794ad9cacf7a2cae31ee0a769bf')
+# ts.set_token('2e2ec7b610512cc2704e3aa692711794ad9cacf7a2cae31ee0a769bf')
 
 get_ta_data(path_data)
 
