@@ -5,15 +5,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-ts_code_str = '601989.SH'
-st_code_str = '601989'
+ts_code_str = '000868.SZ'
+st_code_str = '000868'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
 
 dt_now = datetime.datetime.now().date()
 # dt_now = datetime.datetime.strptime('20160101', '%Y%m%d').date()
 dt_now_str = dt_now.strftime('%Y%m%d')
-dt_data_start = dt_now - datetime.timedelta(days=365)
+dt_data_start = dt_now - datetime.timedelta(days=89)
 dt_data_start_str = dt_data_start.strftime('%Y%m%d')
 
 
@@ -39,9 +39,31 @@ def get_ta_data(path_data):
             writer.save()
 
 
+def compute_power_data(df_data, k_start, k_end):
+    """
+     compute mean surface
+    """
+    i = k_end
+    delta_sum = 0
+    while i != k_start:
+        delta_sum += df_data.loc[i, 'ma3'] - df_data.loc[i, 'ma5']
+        df_data.loc[i, 'power'] = float(delta_sum / (k_end - i+1))
+        i -= 1
+    return 0
+
+
 get_ta_data(path_file)
 
 df = pd.read_excel(path_file, sheet_name='history', converters={'trade_date': str})
+
+k_start = -1
+k_end = 0
+k = 0
+for k in df.index.values:
+    if ((df.loc[k, 'ma3'] >= df.loc[k, 'ma5']) and (df.loc[k+1, 'ma3'] < df.loc[k+1, 'ma5'])) or ((df.loc[k, 'ma3'] <= df.loc[k, 'ma5']) and (df.loc[k+1, 'ma3'] > df.loc[k+1, 'ma5'])):
+        k_end = k
+        compute_power_data(df, k_start, k_end)
+        k_start = k_end
 
 df['trade_date'] = pd.to_datetime(df['trade_date'])
 # x = df.loc[:, 'signal_date'].values
@@ -55,6 +77,7 @@ df['close_%'] = df['close']
 
 plt.subplot(211)
 df['delta'].plot()
+df['power'].plot()
 plt.grid(True)
 plt.ylabel('delta', size=15)
 plt.subplot(212)
