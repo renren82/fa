@@ -5,15 +5,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-ts_code_str = '000868.SZ'
-st_code_str = '000868'
+ts_code_str = '600635.SH'
+st_code_str = '600635'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
 
 dt_now = datetime.datetime.now().date()
 # dt_now = datetime.datetime.strptime('20160101', '%Y%m%d').date()
 dt_now_str = dt_now.strftime('%Y%m%d')
-dt_data_start = dt_now - datetime.timedelta(days=89)
+dt_data_start = dt_now - datetime.timedelta(days=233)
 dt_data_start_str = dt_data_start.strftime('%Y%m%d')
 
 
@@ -53,7 +53,6 @@ def compute_power_data(df_data, k_start, k_end):
 
 
 get_ta_data(path_file)
-
 df = pd.read_excel(path_file, sheet_name='history', converters={'trade_date': str})
 
 k_start = -1
@@ -65,12 +64,12 @@ for k in df.index.values:
         compute_power_data(df, k_start, k_end)
         k_start = k_end
 
-df['trade_date'] = pd.to_datetime(df['trade_date'])
-# x = df.loc[:, 'signal_date'].values
+# df['trade_date'] = pd.to_datetime(df['trade_date'])
+# # x = df.loc[:, 'signal_date'].values
+# #
+# # y = df.loc[:, 'delta_%'].values
 #
-# y = df.loc[:, 'delta_%'].values
-
-df = df.set_index('trade_date')
+# df = df.set_index('trade_date')
 
 df['delta'] = df['ma3'] - df['ma5']
 df['close_%'] = df['close']
@@ -80,6 +79,8 @@ df['delta'].plot()
 df['power'].plot()
 plt.grid(True)
 plt.ylabel('delta', size=15)
+plt.gca().invert_xaxis()
+
 plt.subplot(212)
 df['close_%'].plot()
 
@@ -87,6 +88,7 @@ plt.grid(True)
 plt.ylabel('price', size=15)
 # plt.title('title name')
 # plt.rcParams['savefig.dpi'] = 1024
+plt.gca().invert_xaxis()
 plt.show()
 # plt.savefig('./a.png', dpi=1000)
 # plt.savefig('./a.png')
