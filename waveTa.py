@@ -89,7 +89,7 @@ df['delta'].plot()
 df['power'].plot()
 df['close_%'].plot()
 plt.grid(True)
-plt.ylabel('delta', size=15)
+plt.ylabel('power', size=15)
 plt.gca().invert_xaxis()
 plt.legend()
 
