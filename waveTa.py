@@ -5,10 +5,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-ts_code_str = '600635.SH'
-st_code_str = '600635'
+# code：股票代码，即6位数字代码，或者指数代码（sh=上证指数 sz=深圳成指 hs300=沪深300指数 sz50=上证50 zxb=中小板 cyb=创业板）
+# .SH .SZ
+ts_code_str = '002403.SZ'
+st_code_str = '002403'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
+path_result_file = path_root + ts_code_str + '_result' + '.xlsx'
 
 dt_now = datetime.datetime.now().date()
 # dt_now = datetime.datetime.strptime('20160101', '%Y%m%d').date()
@@ -28,15 +31,18 @@ def get_ta_data(path_data):
     """
     get base delta value for ma3-ma5
     """
-    if file_exist(path_data) == 0:
-        df = ts.pro_bar(ts_code=ts_code_str, adj='qfq', start_date=dt_data_start_str,
-                        end_date=dt_now_str, ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233])
-        # print(df.head())
-        writer = pd.ExcelWriter(path_data)
-        # print(type(df).__name__)
-        if type(df).__name__ == 'DataFrame':
-            df.to_excel(writer, sheet_name='history', index=False)
-            writer.save()
+    if os.path.exists(path_data):
+        return 1
+
+    # asset	str	Y	资产类别：E股票 I沪深指数 C数字货币 FT期货 FD基金 O期权 CB可转债（v1.2.39），默认E
+    df = ts.pro_bar(ts_code=ts_code_str, adj='qfq', start_date=dt_data_start_str,
+                    end_date=dt_now_str, ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233])
+    # print(df.head())
+    writer = pd.ExcelWriter(path_data)
+    # print(type(df).__name__)
+    if type(df).__name__ == 'DataFrame':
+        df.to_excel(writer, sheet_name='history', index=False)
+        writer.save()
 
 
 def compute_power_data(df_data, k_start, k_end):
@@ -64,6 +70,13 @@ for k in df.index.values:
         compute_power_data(df, k_start, k_end)
         k_start = k_end
 
+df['delta'] = df['ma3'] - df['ma5']
+df['close_%'] = df['close']/7.5 - 1
+
+writer = pd.ExcelWriter(path_result_file)
+df.to_excel(writer, sheet_name='history', index=False)
+writer.save()
+
 # df['trade_date'] = pd.to_datetime(df['trade_date'])
 # # x = df.loc[:, 'signal_date'].values
 # #
@@ -71,24 +84,24 @@ for k in df.index.values:
 #
 # df = df.set_index('trade_date')
 
-df['delta'] = df['ma3'] - df['ma5']
-df['close_%'] = df['close']
-
 plt.subplot(211)
 df['delta'].plot()
 df['power'].plot()
+df['close_%'].plot()
 plt.grid(True)
 plt.ylabel('delta', size=15)
 plt.gca().invert_xaxis()
+plt.legend()
 
 plt.subplot(212)
-df['close_%'].plot()
+df['high'].plot()
 
 plt.grid(True)
 plt.ylabel('price', size=15)
 # plt.title('title name')
 # plt.rcParams['savefig.dpi'] = 1024
 plt.gca().invert_xaxis()
+plt.legend()
 plt.show()
 # plt.savefig('./a.png', dpi=1000)
 # plt.savefig('./a.png')
