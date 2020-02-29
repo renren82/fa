@@ -3,8 +3,8 @@ import os
 import requests
 import matplotlib.pyplot as plt
 
-codename = 'sh600635'
-freq = '5'
+codename = 'sz002403'
+freq = '60'
 path = 'H:/' + codename + '_' + freq + 'm.xlsx'
 
 
@@ -17,6 +17,7 @@ def compute_back_power_data(df_data, k_start, k_end):
     while i <= k_start:
         delta_sum += df_data.loc[i, 'ma3'] - df_data.loc[i, 'ma5']
         df_data.loc[i, 'power'] = float(delta_sum / (i - k_end + 1))
+        # df_data.loc[i, 'power'] = float(delta_sum)
         i += 1
     return 0
 
@@ -40,8 +41,8 @@ def power_data(df):
 
 def get_sina_data(path, datanum):
 
-    if os.path.exists(path):
-        return 1
+    # if os.path.exists(path):
+    #     return 1
 
     df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
                                'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
@@ -100,36 +101,43 @@ def get_sina_data(path, datanum):
     ma5 = df.close.rolling(window=5, center=False).mean()
     df['ma5'] = ma5
 
+    df['delta'] = df['ma3'] - df['ma5']
+
     df.to_excel(path, index=False)
 
     return 1
 
 
-get_sina_data(path, '150')
+if __name__ == '__main__':
 
-df = pd.read_excel(path)
-power_data(df)
+    get_sina_data(path, '256')
 
-# df['trade_date'] = pd.to_datetime(df['trade_date'])
-# # x = df.loc[:, 'signal_date'].values
-# #
-# # y = df.loc[:, 'delta_%'].values
-#
-# df = df.set_index('trade_date')
+    '''
+    plt 
+    '''
+    df = pd.read_excel(path)
+    power_data(df)
+    # df['trade_date'] = pd.to_datetime(df['trade_date'])
+    # # x = df.loc[:, 'signal_date'].values
+    # #
+    # # y = df.loc[:, 'delta_%'].values
+    #
+    # df = df.set_index('trade_date')
 
-df['delta'] = df['ma3'] - df['ma5']
-# df['close_%'] = df['close']
+    # df['close_%'] = df['close']
 
-plt.subplot(211)
-df['delta'].plot()
-df['power'].plot()
-plt.grid(True)
-plt.ylabel('delta', size=15)
-plt.subplot(212)
-df['close'].plot()
-
-plt.grid(True)
-plt.ylabel('price', size=15)
-# plt.title('title name')
-# plt.rcParams['savefig.dpi'] = 1024
-plt.show()
+    plt.subplot(211)
+    df['delta'].plot()
+    # df['power'].plot(kind='bar', color='r')
+    df['power'].plot()
+    plt.legend()
+    plt.grid(True)
+    plt.ylabel('delta', size=15)
+    plt.subplot(212)
+    df['close'].plot()
+    plt.legend()
+    plt.grid(True)
+    plt.ylabel('close', size=15)
+    # plt.title('title name')
+    # plt.rcParams['savefig.dpi'] = 1024
+    plt.show()
