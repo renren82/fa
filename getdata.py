@@ -3,8 +3,9 @@ import os
 import requests
 import matplotlib.pyplot as plt
 
-codename = 'sz002403'
-freq = '60'
+# codename = 'sz002403'
+codename = 'sh600635'
+freq = '30'
 path = 'H:/' + codename + '_' + freq + 'm.xlsx'
 
 
@@ -130,6 +131,8 @@ if __name__ == '__main__':
     df['delta'].plot()
     # df['power'].plot(kind='bar', color='r')
     df['power'].plot()
+    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
+
     plt.legend()
     plt.grid(True)
     plt.ylabel('delta', size=15)

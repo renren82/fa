@@ -2,11 +2,18 @@ import struct
 import os
 import datetime
 import math
+import pandas as pd
+import getdata
+import matplotlib.pyplot as plt
 
-path = './lday/'
-
+path = "H:/"
+file_path = "H:/sh000016.day"
 
 def gettdxdaydata(file_path, name):
+
+    df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
+                               'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
+
     data = []
     with open(file_path, 'rb') as f:
         while True:
@@ -27,7 +34,7 @@ def gettdxdaydata(file_path, name):
             12 ~ 15 字节：low*100, 整型
             16 ~ 19 字节：close*100, 整型
             20 ~ 23 字节：amount（元），float型
-            24 ~ 27 字节：vol(gu)，整型
+            24 ~ 27 字节：vol(股)，整型
             28 ~ 31 字节：（保留）
             """
             if not data_date:
@@ -42,11 +49,38 @@ def gettdxdaydata(file_path, name):
             data_vol = struct.unpack("l", data_vol)
             data_reservation = struct.unpack("l", data_reservation)
             date_format = datetime.datetime.strptime(str(data_date[0]), '%Y%M%d')  # 格式化日期
-            data_list = date_format.strftime('%Y-%M-%d') + "," + str(data_open[0] / 100) + "," + str(
+            data_list = date_format.strftime('%Y%M%d') + "," + str(data_open[0] / 100) + "," + str(
                 data_high[0] / 100.0) + "," + str(data_low[0] / 100.0) + "," + str(data_close[0] / 100.0) + "," + str(
                 data_vol[0]) + "\r\n"
-            print(data_list)
+            # print(data_list)
 
+            column = {}
+            column['ts_code'] = name
+            column['trade_date'] = date_format.strftime('%Y%M%d')
+            column['vol'] = data_vol[0]
+            column['open'] = data_open[0] / 100.0
+            column['close'] = data_close[0] / 100.0
+            column['high'] = data_high[0] / 100.0
+            column['low'] = data_low[0] / 100.0
+            # print(column)
+            df = df.append(column, ignore_index=True)
+
+        vol3 = df.vol.rolling(window=3, center=False).mean()
+        df['ma_v_3'] = vol3
+        vol5 = df.vol.rolling(window=5, center=False).mean()
+        df['ma_v_5'] = vol5
+
+        ma3 = df.close.rolling(window=3, center=False).mean()
+        df['ma3'] = ma3
+        ma5 = df.close.rolling(window=5, center=False).mean()
+        df['ma5'] = ma5
+
+        df['delta'] = df['ma3'] - df['ma5']
+
+        file_result = path + name + "_d.xlsx"
+        df.to_excel(file_result, index=False)
+
+        return file_result
 
 def gettdxmdata(file_path, name):
     data = []
@@ -108,6 +142,27 @@ def gettdxmdata(file_path, name):
             print(data_list)
 
 
-list_file = os.listdir(path)
-for i in list_file:
-    gettdxdaydata(path + i, i[:-4])
+# list_file = os.listdir(path)
+# for i in list_file:
+# gettdxdaydata(file_path, file_path[3:-4])
+df = pd.read_excel(gettdxdaydata(file_path, file_path[3:-4]))
+getdata.power_data(df)
+
+df['close_%'] = df['close'] / 100 - 1
+
+plt.subplot(211)
+df['delta'].plot()
+# df['power'].plot(kind='bar', color='r')
+df['power'].plot()
+df['close_%'].plot()
+plt.legend()
+plt.grid(True)
+plt.ylabel('delta', size=15)
+plt.subplot(212)
+df['close'].plot()
+plt.legend()
+plt.grid(True)
+plt.ylabel('close', size=15)
+# plt.title('title name')
+# plt.rcParams['savefig.dpi'] = 1024
+plt.show()
