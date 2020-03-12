@@ -9,7 +9,7 @@ path_file = path_root + '000559.SZ_result.xlsx'
 
 df = pd.read_excel(path_file, sheet_name='history', converters={'signal_date': str})
 
-df['signal_date'] = pd.to_datetime(df['signal_date'])
+df['signal_date'] = pd.to_datetime(df['signal_date'], format="%Y%m%d")
 # x = df.loc[:, 'signal_date'].values
 #
 # y = df.loc[:, 'delta_%'].values

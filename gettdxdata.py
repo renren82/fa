@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 path = "H:/"
 file_path = "H:/sh000016.day"
 
+
 def gettdxdaydata(file_path, name):
 
     df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',

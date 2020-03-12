@@ -2,11 +2,14 @@ import pandas as pd
 import os
 import requests
 import matplotlib.pyplot as plt
+import datetime
 
 # codename = 'sz002403'
 codename = 'sh600635'
-freq = '30'
-path = 'H:/' + codename + '_' + freq + 'm.xlsx'
+freq = '60'
+dt_now = datetime.datetime.now().date()
+dt_now_str = dt_now.strftime('%Y%m%d')
+path = 'H:/' + codename + '_' + freq + 'm_' + dt_now_str + '.xlsx'
 
 
 def compute_back_power_data(df_data, k_start, k_end):
