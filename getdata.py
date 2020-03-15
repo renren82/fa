@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import datetime
 
 # codename = 'sz002403'
-codename = 'sh600635'
+codename = 'sh601989'
 freq = '60'
 dt_now = datetime.datetime.now().date()
 dt_now_str = dt_now.strftime('%Y%m%d')
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     df['delta'].plot()
     # df['power'].plot(kind='bar', color='r')
     df['power'].plot()
-    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
+#    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
 
     plt.legend()
     plt.grid(True)

@@ -31,10 +31,10 @@ df = pd.read_excel(path_file, sheet_name='history')
 #     if type(df.loc[i, 'trade_date']) == np.float64 and math.isnan(df.loc[i, 'trade_date']) is True:
 #         print(df.loc[i, 'trade_date'])
 
-# empty datetime
+# empty class 'pandas._libs.tslibs.timestamps.Timestamp'
 df['trade_date'] = pd.to_datetime(df['trade_date'], format="%Y%m%d")
 # print(df.dtypes)
 for i in df.index.values:
-    # print(type(df.loc[i, 'trade_date']))
+    print(type(df.loc[i, 'trade_date']))
     if pd.isna(df.loc[i, 'trade_date']) is not True:
         print(df.loc[i, 'trade_date'])

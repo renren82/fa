@@ -7,7 +7,7 @@ import getdata
 import matplotlib.pyplot as plt
 
 path = "H:/"
-file_path = "H:/sh000016.day"
+# file_path = "H:/sh000016.day"
 
 
 def gettdxdaydata(file_path, name):
@@ -79,12 +79,17 @@ def gettdxdaydata(file_path, name):
         df['delta'] = df['ma3'] - df['ma5']
 
         file_result = path + name + "_d.xlsx"
-        df.to_excel(file_result, index=False)
+        writer_delta = pd.ExcelWriter(file_result)
+        df.to_excel(writer_delta, sheet_name='day', index=False)
+        writer_delta.save()
+        writer_delta.close()
 
         return file_result
 
 def gettdxmdata(file_path, name):
     data = []
+    df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
+                               'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
     with open(file_path, 'rb') as f:
         while True:
             num = f.read(2)
@@ -140,30 +145,72 @@ def gettdxmdata(file_path, name):
             data_list = date_format.strftime('%Y-%M-%d') + " " + str(format(hour, '02d')) + ":" \
                         + str(format(minute, '02d')) + "," + str(open_p) + "," + str(high_p) + "," + str(
                 low_p) + "," + str(close_p) + "," + str(data_vol[0]) + "\r\n"
-            print(data_list)
+            # print(data_list)
+
+            column = {}
+
+            column['ts_code'] = name
+            column['trade_date'] = date_format.strftime('%Y-%M-%d') + " " + str(format(hour, '02d')) + ":" \
+                        + str(format(minute, '02d')) + ":00"
+            column['vol'] = data_vol[0]
+            column['open'] = open_p
+            column['close'] = close_p
+            column['high'] = high_p
+            column['low'] = low_p
+            # print(column)
+            df = df.append(column, ignore_index=True)
+
+        vol3 = df.vol.rolling(window=3, center=False).mean()
+        df['ma_v_3'] = vol3
+        vol5 = df.vol.rolling(window=5, center=False).mean()
+        df['ma_v_5'] = vol5
+
+        ma3 = df.close.rolling(window=3, center=False).mean()
+        df['ma3'] = ma3
+        ma5 = df.close.rolling(window=5, center=False).mean()
+        df['ma5'] = ma5
+
+        df['delta'] = df['ma3'] - df['ma5']
+
+        file_result = path + name + "_5min.xlsx"
+        writer_delta = pd.ExcelWriter(file_result)
+        df.to_excel(writer_delta, sheet_name='5min', index=False)
+        writer_delta.save()
+        writer_delta.close()
 
 
-# list_file = os.listdir(path)
-# for i in list_file:
-# gettdxdaydata(file_path, file_path[3:-4])
-df = pd.read_excel(gettdxdaydata(file_path, file_path[3:-4]))
-getdata.power_data(df)
+if __name__ == '__main__':
+    dir_path = 'D:/new_tdx/vipdoc/sh/lday/'
+    list_file = os.listdir(dir_path)
+    for file_name in list_file:
+        file_path = dir_path + file_name
+        gettdxdaydata(file_path, file_path[-12:-4])
 
-df['close_%'] = df['close'] / 100 - 1
+    dir_path = 'D:/new_tdx/vipdoc/sh/fzline/'
+    list_file = os.listdir(dir_path)
+    for file_name in list_file:
+        file_path = dir_path + file_name
+        gettdxmdata(file_path, file_path[-12:-4])
 
-plt.subplot(211)
-df['delta'].plot()
-# df['power'].plot(kind='bar', color='r')
-df['power'].plot()
-df['close_%'].plot()
-plt.legend()
-plt.grid(True)
-plt.ylabel('delta', size=15)
-plt.subplot(212)
-df['close'].plot()
-plt.legend()
-plt.grid(True)
-plt.ylabel('close', size=15)
-# plt.title('title name')
-# plt.rcParams['savefig.dpi'] = 1024
-plt.show()
+
+    # df = pd.read_excel(gettdxdaydata(file_path, file_path[3:-4]))
+    # getdata.power_data(df)
+    #
+    # df['close_%'] = df['close'] / 100 - 1
+    #
+    # plt.subplot(211)
+    # df['delta'].plot()
+    # # df['power'].plot(kind='bar', color='r')
+    # df['power'].plot()
+    # df['close_%'].plot()
+    # plt.legend()
+    # plt.grid(True)
+    # plt.ylabel('delta', size=15)
+    # plt.subplot(212)
+    # df['close'].plot()
+    # plt.legend()
+    # plt.grid(True)
+    # plt.ylabel('close', size=15)
+    # # plt.title('title name')
+    # # plt.rcParams['savefig.dpi'] = 1024
+    # plt.show()

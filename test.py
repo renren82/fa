@@ -1,5 +1,8 @@
 import tushare as ts
 
+"""
+数据频度 ：支持分钟(min)/日(D)/周(W)/月(M)K线，其中1min表示1分钟（类推1/5/15/30/60分钟） ，默认D
+"""
 # df = ts.pro_bar(ts_code='000001.SZ', adj='qfq', start_date='20180101', end_date='20181011', freq='1min', ma=[3, 5])
 # print(df.head())
 
