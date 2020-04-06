@@ -5,10 +5,22 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-ts_code_str = 'sh000016_60min'
+"""
+上证50指数   sh000016
+沪深300    sh000300
+中证环保指数 sh000827
+中证500  sh000905
+上证指数   sh999999
+深证成指   399001
+中小板指   sz399005
+创业板指 sz399006
+"""
+
+#　ts_code_str = 'sh000016_60min'
+ts_code_str = 'sh000016_d'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
-show_num = 233
+show_num = -300
 
 
 def compute_power_data(df_data, k_start, k_end):
@@ -78,10 +90,10 @@ if __name__ == '__main__':
 
     max_index = max(df.index.values)
 
-    plt.subplot(211)
-    df[0:]['delta'].plot()
+    plt.subplot(311)
+    df[show_num:]['delta'].plot()
     # df['power'].plot(kind='bar', color='r')
-    df[0:]['power'].plot()
+    df[show_num:]['power'].plot()
     # df['close_%'].plot()
 
     #                   记号形状       颜色           点的大小    设置标签
@@ -92,21 +104,36 @@ if __name__ == '__main__':
 
     plt.grid(True)
     plt.ylabel('power', size=15)
+    plt.title(ts_code_str)
     # plt.gca().invert_xaxis()
     plt.legend()
 
-    plt.subplot(212)
+    plt.subplot(312)
     # df[10:].close.plot()
     # df['close'].plot()
     # df.close.plot()
-    df[0:]['close'].plot()
+    df[show_num:]['close'].plot()
 
     plt.grid(True)
     plt.ylabel('close', size=15)
+    # plt.title(ts_code_str)
+    # plt.rcParams['savefig.dpi'] = 1024
+    # plt.gca().invert_xaxis()
+    plt.legend()
+
+    plt.subplot(313)
+    # df[10:].close.plot()
+    # df['close'].plot()
+    # df.close.plot()
+    df[show_num:]['ma_v_3'].plot(color='g')
+    plt.grid(True)
+    plt.ylabel('ma_v_3', size=15)
     # plt.title('title name')
     # plt.rcParams['savefig.dpi'] = 1024
     # plt.gca().invert_xaxis()
     plt.legend()
+
+
     plt.show()
     # plt.savefig('./a.png', dpi=1000)
     # plt.savefig('./a.png')

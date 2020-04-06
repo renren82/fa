@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # code：股票代码，即6位数字代码，或者指数代码（sh=上证指数 sz=深圳成指 hs300=沪深300指数 sz50=上证50 zxb=中小板 cyb=创业板）
+title_name = 'zgzg'
 # .SH .SZ '002403.SZ'
 ts_code_str = '601989.SH'
 st_code_str = '601989'
@@ -38,7 +39,7 @@ def get_ta_data(path_data):
 
     # asset	str	Y	资产类别：E股票 I沪深指数 C数字货币 FT期货 FD基金 O期权 CB可转债（v1.2.39），默认E
     df = ts.pro_bar(ts_code=ts_code_str, adj='qfq', start_date=dt_data_start_str,
-                    end_date=dt_now_str, freq='W', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233])
+                    end_date=dt_now_str, freq='D', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233])
     # print(df.head())
     df['delta'] = df['ma3'] - df['ma5']
 
@@ -107,6 +108,7 @@ plt.grid(True)
 plt.ylabel('power', size=15)
 plt.gca().invert_xaxis()
 plt.legend()
+plt.title(title_name)
 
 plt.subplot(212)
 # df[10:].close.plot()
@@ -114,7 +116,7 @@ df[0:show_num]['close'].plot()
 
 plt.grid(True)
 plt.ylabel('close', size=15)
-# plt.title('title name')
+# plt.title(title_name)
 # plt.rcParams['savefig.dpi'] = 1024
 plt.gca().invert_xaxis()
 plt.legend()

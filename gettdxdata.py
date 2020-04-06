@@ -192,6 +192,20 @@ if __name__ == '__main__':
         file_path = dir_path + file_name
         gettdxmdata(file_path, file_path[-12:-4])
 
+    dir_path = 'D:/new_tdx/vipdoc/sz/lday/'
+    list_file = os.listdir(dir_path)
+    for file_name in list_file:
+        file_path = dir_path + file_name
+        gettdxdaydata(file_path, file_path[-12:-4])
+
+    dir_path = 'D:/new_tdx/vipdoc/sz/fzline/'
+    list_file = os.listdir(dir_path)
+    for file_name in list_file:
+        file_path = dir_path + file_name
+        gettdxmdata(file_path, file_path[-12:-4])
+
+
+
 
     # df = pd.read_excel(gettdxdaydata(file_path, file_path[3:-4]))
     # getdata.power_data(df)
