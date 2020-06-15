@@ -16,11 +16,14 @@ import numpy as np
 创业板指 sz399006
 """
 
-#　ts_code_str = 'sh000016_60min'
-ts_code_str = 'sh000016_d'
+# ts_code_str = 'sh000016_60min'
+# ts_code_str = 'sh000016_d'
+ts_code_str = 'sz000559_60min'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
+# for 60min
 show_num = -300
+# for 30min show_num = -450
 
 
 def compute_power_data(df_data, k_start, k_end):

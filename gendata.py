@@ -3,14 +3,15 @@ import datetime
 import pandas as pd
 
 path_root = 'H:/'
-path_file = path_root + 'sh000016_5min.xlsx'
-path_result = path_root + 'sh000016_60min.xlsx'
+code_str = 'sz000559'
+path_file = path_root + code_str + '_5min.xlsx'
+path_result = path_root + code_str + '_60min.xlsx'
 
 
 def gen_back_data(path_file_in, step, path_result_out):
     df = pd.read_excel(path_file_in, sheet_name='5min')
-    df_new = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
-                               'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
+    df_new = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol', 'amount', 'ma3',
+                                   'ma_v_3', 'ma5', 'ma_v_5'])
 
     for i in range(0, max(df.index.values), step):
         df_new = df_new.append(df.loc[i + step - 1])

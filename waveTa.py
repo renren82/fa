@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # code：股票代码，即6位数字代码，或者指数代码（sh=上证指数 sz=深圳成指 hs300=沪深300指数 sz50=上证50 zxb=中小板 cyb=创业板）
-title_name = 'zgzg'
+title_name = 'wxqc'
 # .SH .SZ '002403.SZ'
-ts_code_str = '601989.SH'
-st_code_str = '601989'
+ts_code_str = '000559.SZ'
+st_code_str = '000559'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
 # path_result_file = path_root + ts_code_str + '_result' + '.xlsx'
@@ -38,6 +38,7 @@ def get_ta_data(path_data):
     #     return 1
 
     # asset	str	Y	资产类别：E股票 I沪深指数 C数字货币 FT期货 FD基金 O期权 CB可转债（v1.2.39），默认E
+    # freq D W M
     df = ts.pro_bar(ts_code=ts_code_str, adj='qfq', start_date=dt_data_start_str,
                     end_date=dt_now_str, freq='D', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233])
     # print(df.head())
@@ -92,7 +93,7 @@ for k in df.index.values:
 
 max_index = max(df.index.values)
 
-plt.subplot(211)
+plt.subplot(311)
 df[0:show_num]['delta'].plot()
 # df['power'].plot(kind='bar', color='r')
 df[0:show_num]['power'].plot()
@@ -110,7 +111,7 @@ plt.gca().invert_xaxis()
 plt.legend()
 plt.title(title_name)
 
-plt.subplot(212)
+plt.subplot(312)
 # df[10:].close.plot()
 df[0:show_num]['close'].plot()
 
@@ -120,6 +121,22 @@ plt.ylabel('close', size=15)
 # plt.rcParams['savefig.dpi'] = 1024
 plt.gca().invert_xaxis()
 plt.legend()
+
+plt.subplot(313)
+# df[10:].close.plot()
+# df['close'].plot()
+# df.close.plot()
+# df[0:show_num]['ma_v_3'].plot(color='g')
+df[0:show_num]['vol'].plot(color='g')
+plt.grid(True)
+plt.ylabel('vol', size=15)
+# plt.title('title name')
+# plt.rcParams['savefig.dpi'] = 1024
+plt.gca().invert_xaxis()
+plt.legend()
+
+
+
 plt.show()
 # plt.savefig('./a.png', dpi=1000)
 # plt.savefig('./a.png')

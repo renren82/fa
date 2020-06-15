@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import datetime
 
 # codename = 'sz002403'
-codename = 'sh601989'
+# codename = 'sh601989'
+codename = 'sz000559'
+title_name = 'wxqc'
 freq = '60'
 dt_now = datetime.datetime.now().date()
 dt_now_str = dt_now.strftime('%Y%m%d')
@@ -139,6 +141,8 @@ if __name__ == '__main__':
     plt.legend()
     plt.grid(True)
     plt.ylabel('delta', size=15)
+    plt.title(title_name)
+
     plt.subplot(212)
     df['close'].plot()
     plt.legend()
