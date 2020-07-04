@@ -34,7 +34,7 @@ delta_rate_max_date = dt_baseDeltaValue_end_str
 delta_3_list = []
 delta_5_list = []
 
-row_dic = {'signal_date': ' ', 'delta': 0.0, 'delta_base': 0.0,'delta_%': 0.0, 'high': 0.0, 'high_base': 0.0, 'high_%': 0.0}
+row_dic = {'sell_signal_date': ' ', 'delta': 0.0, 'delta_base': 0.0,'delta_%': 0.0, 'high': 0.0, 'high_base': 0.0, 'high_%': 0.0}
 df_result = pd.DataFrame()
 df_result.to_excel(path_result)
 
@@ -51,7 +51,7 @@ def delta_base_3ma_5ma(filepath, dt_base_delta_start_str, dt_base_delta_end_str)
     """
     get base delta and base high
     """
-    df_data = pd.read_excel(filepath, sheet_name='history',converters={'trade_date': str})
+    df_data = pd.read_excel(filepath, sheet_name='Data',converters={'trade_date': str})
 
     if 'ma3' not in list(df_data):
         return 0
@@ -83,7 +83,7 @@ def delta_base_3ma_5ma(filepath, dt_base_delta_start_str, dt_base_delta_end_str)
 
 
 def delta_pre_3ma_5ma(filepath):
-    df_data = pd.read_excel(filepath, sheet_name='history')
+    df_data = pd.read_excel(filepath, sheet_name='Data')
 
     if 'ma3' not in list(df_data):
         return 0
@@ -99,7 +99,7 @@ def delta_pre_3ma_5ma(filepath):
 
 def tend_ta_tst(filepath, dt_str):
     global base_delta_value, base_high_price, df_result, delta_rate_max, delta_rate_max_date
-    df_data = pd.read_excel(filepath, sheet_name='history',converters={'trade_date': str})
+    df_data = pd.read_excel(filepath, sheet_name='Data',converters={'trade_date': str})
 
     if 'ma3' not in list(df_data):
         return 0
@@ -146,7 +146,7 @@ def tend_ta_tst(filepath, dt_str):
 #         writer = pd.ExcelWriter(path_data)
 #         # print(type(df).__name__)
 #         if type(df).__name__ == 'DataFrame':
-#             df.to_excel(writer, sheet_name='history', index=False)
+#             df.to_excel(writer, sheet_name='Data', index=False)
 #             writer.save()
 #
 #     delta_value = delta_pre_3ma_5ma(path_data)
@@ -177,7 +177,7 @@ def get_ta_data(path_data):
         writer = pd.ExcelWriter(path_data)
         # print(type(df).__name__)
         if type(df).__name__ == 'DataFrame':
-            df.to_excel(writer, sheet_name='history', index=False)
+            df.to_excel(writer, sheet_name='Data', index=False)
             writer.save()
 
 
