@@ -7,6 +7,7 @@ import getdata
 import matplotlib.pyplot as plt
 
 path = "H:/"
+base_dir = 'E:/'
 # file_path = "H:/sh000016.day"
 
 
@@ -77,6 +78,9 @@ def gettdxdaydata(file_path, name):
         df['ma5'] = ma5
 
         df['delta'] = df['ma3'] - df['ma5']
+
+        df = df.reindex(index=df.index[::-1])
+        df = df.reset_index(drop=True)
 
         file_result = path + name + "_d.xlsx"
         writer_delta = pd.ExcelWriter(file_result)
@@ -172,6 +176,9 @@ def gettdxmdata(file_path, name):
 
         df['delta'] = df['ma3'] - df['ma5']
 
+        df = df.reindex(index=df.index[::-1])
+        df = df.reset_index(drop=True)
+
         file_result = path + name + "_5min.xlsx"
         writer_delta = pd.ExcelWriter(file_result)
         df.to_excel(writer_delta, sheet_name='5min', index=False)
@@ -180,25 +187,25 @@ def gettdxmdata(file_path, name):
 
 
 if __name__ == '__main__':
-    dir_path = 'D:/new_tdx/vipdoc/sh/lday/'
+    dir_path = base_dir + 'new_tdx/vipdoc/sh/lday/'
     list_file = os.listdir(dir_path)
     for file_name in list_file:
         file_path = dir_path + file_name
         gettdxdaydata(file_path, file_path[-12:-4])
 
-    dir_path = 'D:/new_tdx/vipdoc/sh/fzline/'
+    dir_path = base_dir + 'new_tdx/vipdoc/sh/fzline/'
     list_file = os.listdir(dir_path)
     for file_name in list_file:
         file_path = dir_path + file_name
         gettdxmdata(file_path, file_path[-12:-4])
 
-    dir_path = 'D:/new_tdx/vipdoc/sz/lday/'
+    dir_path = base_dir + 'new_tdx/vipdoc/sz/lday/'
     list_file = os.listdir(dir_path)
     for file_name in list_file:
         file_path = dir_path + file_name
         gettdxdaydata(file_path, file_path[-12:-4])
 
-    dir_path = 'D:/new_tdx/vipdoc/sz/fzline/'
+    dir_path = base_dir + 'new_tdx/vipdoc/sz/fzline/'
     list_file = os.listdir(dir_path)
     for file_name in list_file:
         file_path = dir_path + file_name

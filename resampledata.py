@@ -8,12 +8,13 @@ ts_code_str = 'sh000827_d'
 resample_step = 'M'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
-file_result = path_root + ts_code_str + '_' + resample_step +".xlsx"
+file_result = path_root + ts_code_str + '_' + resample_step + ".xlsx"
 
 
 def resample_tdxdata(step):
         cycle_df = pd.DataFrame()
         df = pd.read_excel(path_file, sheet_name='day')
+        # print(df)
         df.trade_date = pd.to_datetime(df.trade_date, format="%Y%m%d")
         df.set_index('trade_date', inplace=True)
 
@@ -36,11 +37,27 @@ def resample_tdxdata(step):
 
         cycle_df['delta'] = cycle_df['ma3'] - cycle_df['ma5']
 
+        # print(cycle_df)
         writer_delta = pd.ExcelWriter(file_result)
         cycle_df.to_excel(writer_delta, sheet_name=step, index=True)
         writer_delta.save()
         writer_delta.close()
 
 
+def resample_formatdata(file_result):
+        df = pd.read_excel(file_result)
+        df['trade_date'] = pd.to_datetime(df['trade_date'], format="%Y-%m-%d %H:%M:%S")
+        df['trade_date'] = df['trade_date'].dt.strftime('%Y%m%d')
+
+        df = df.reindex(index=df.index[::-1])
+        df = df.reset_index(drop=True)
+        print(df)
+        writer_delta = pd.ExcelWriter(file_result)
+        df.to_excel(writer_delta, index=True)
+        writer_delta.save()
+        writer_delta.close()
+
+
 if __name__ == '__main__':
     resample_tdxdata(resample_step)
+    resample_formatdata(file_result)
