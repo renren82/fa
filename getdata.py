@@ -8,10 +8,24 @@ import datetime
 # codename = 'sh601989'
 codename = 'sz000559'
 title_name = 'wxqc'
-freq = '60'
+freq = '30'
 dt_now = datetime.datetime.now().date()
 dt_now_str = dt_now.strftime('%Y%m%d')
 path = 'H:/' + codename + '_' + freq + 'm_' + dt_now_str + '.xlsx'
+
+
+def compute_power_data(df_data, k_start, k_end):
+    """
+     compute mean surface
+    """
+    i = k_end
+    delta_sum = 0
+    while i != k_start:
+        delta_sum += df_data.loc[i, 'ma3'] - df_data.loc[i, 'ma5']
+        df_data.loc[i, 'power'] = float(delta_sum / (k_end - i+1))
+        # df_data.loc[i, 'power'] = float(delta_sum)
+        i -= 1
+    return 0
 
 
 def compute_back_power_data(df_data, k_start, k_end):
@@ -28,7 +42,7 @@ def compute_back_power_data(df_data, k_start, k_end):
     return 0
 
 
-def power_data(df):
+def power_back_data(df):
     '''
     power from ma3 - ma5
     surface
@@ -43,6 +57,19 @@ def power_data(df):
             compute_back_power_data(df, k_start, k_end)
             k_start = k_end
         k -= 1
+
+
+def power_data(df):
+    k_start = -1
+    k_end = 0
+    k = 0
+    for k in df.index.values:
+        if ((df.loc[k, 'ma3'] >= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] < df.loc[k + 1, 'ma5'])) or (
+                (df.loc[k, 'ma3'] <= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] > df.loc[k + 1, 'ma5'])):
+            k_end = k
+            compute_power_data(df, k_start, k_end)
+            k_start = k_end
+
 
 
 def get_sina_data(path, datanum):
@@ -80,10 +107,18 @@ def get_sina_data(path, datanum):
         for j in range(0, len(dayData)):
             field = dayData[j].split(':"')
 
-            if field[0] == 'day':
+            if field[0] == '\"day\"':
                 column['trade_date'] = field[1].replace('"', '')
-            elif field[0] == 'volume':
+            elif field[0] == '\"volume\"':
                 column['vol'] = field[1].replace('"', '')
+            elif field[0] == '\"close\"':
+                column['close'] = field[1].replace('"', '')
+            elif field[0] == '\"open\"':
+                column['open'] = field[1].replace('"', '')
+            elif field[0] == '\"high\"':
+                column['high'] = field[1].replace('"', '')
+            elif field[0] == '\"low\"':
+                column['low'] = field[1].replace('"', '')
             else:
                 column[field[0]] = field[1].replace('"', '')
 
@@ -109,7 +144,14 @@ def get_sina_data(path, datanum):
 
     df['delta'] = df['ma3'] - df['ma5']
 
-    df.to_excel(path, index=False)
+    df['trade_date'] = pd.to_datetime(df['trade_date'], format="%Y-%m-%d %H:%M:%S")
+    df['trade_date'] = df['trade_date'].dt.strftime('%Y%m%d%H%M%S')
+
+    df = df.reindex(index=df.index[::-1])
+    df = df.reset_index(drop=True)
+    print(df.head())
+
+    df.to_excel(path, sheet_name='Data', index=False)
 
     return 1
 
@@ -138,6 +180,7 @@ if __name__ == '__main__':
     df['power'].plot()
 #    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
 
+    plt.gca().invert_xaxis()
     plt.legend()
     plt.grid(True)
     plt.ylabel('delta', size=15)
@@ -145,6 +188,7 @@ if __name__ == '__main__':
 
     plt.subplot(212)
     df['close'].plot()
+    plt.gca().invert_xaxis()
     plt.legend()
     plt.grid(True)
     plt.ylabel('close', size=15)

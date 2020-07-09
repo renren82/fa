@@ -3,11 +3,12 @@ import datetime
 import tushare as ts
 import pandas as pd
 from numpy import *
+import time
 import numpy as np
 
 #  002714.SZ
-ts_code_str = '000559.SZ'
-st_code_str = '000559'
+ts_code_str = '000827.SH'
+st_code_str = '000827'
 
 path_root = 'H:/'
 path_data = path_root + ts_code_str + '.xlsx'
@@ -20,8 +21,8 @@ dt_tst = datetime.datetime.strptime('20150119', '%Y%m%d').date()
 
 # D W M
 freq_label = 'D'
-dt_baseDeltaValue_start_str = '20181015'
-dt_baseDeltaValue_end_str = '20181121'
+dt_baseDeltaValue_start_str = '20180822'
+dt_baseDeltaValue_end_str = '20190614'
 # dt_baseDeltaValue_start_str = '20140110'
 # dt_baseDeltaValue_end_str = '20140306'
 dt_baseDeltaValue_end =datetime.datetime.strptime(dt_baseDeltaValue_end_str,'%Y%m%d').date()
@@ -40,11 +41,11 @@ df_result.to_excel(path_result)
 
 
 def file_exist(path):
-    return 0
-    # if os.path.exists(path):
-    #     return 1
-    # else:
-    #     return 0
+    # return 0
+    if os.path.exists(path):
+        return 1
+    else:
+        return 0
 
 
 def delta_base_3ma_5ma(filepath, dt_base_delta_start_str, dt_base_delta_end_str):
@@ -78,8 +79,8 @@ def delta_base_3ma_5ma(filepath, dt_base_delta_start_str, dt_base_delta_end_str)
                 l_high_list.append(df_data.loc[k+i, 'high'])
                 i += 1
 
-            return float(max(delta_value_list)),  float(max(l_high_list))
-    return 0, 0
+            return df_data, float(max(delta_value_list)),  float(max(l_high_list))
+    return df_data, 0, 0
 
 
 def delta_pre_3ma_5ma(filepath):
@@ -97,12 +98,8 @@ def delta_pre_3ma_5ma(filepath):
     return float(df_data.loc[0, 'ma3'] - df_data.loc[0, 'ma5'])
 
 
-def tend_ta_tst(filepath, dt_str):
+def tend_ta_tst(df_data, dt_str):
     global base_delta_value, base_high_price, df_result, delta_rate_max, delta_rate_max_date
-    df_data = pd.read_excel(filepath, sheet_name='Data',converters={'trade_date': str})
-
-    if 'ma3' not in list(df_data):
-        return 0
 
     for k in df_data.index.values:
         # print(type(df_data.loc[k, 'trade_date']))
@@ -165,6 +162,33 @@ def tend_ta_tst(filepath, dt_str):
 #             print('now is warn')
 
 
+def get_ta_real_data(df, base_delta_value):
+    global dt_now_str
+    # df_real = ts.get_realtime_quotes(st_code_str)
+    # # print(df_real)
+    # price_now = df_real.loc[0, 'price']
+    # time_now = df_real.loc[0, 'time']
+    price_now = 1535.61
+    time_now = dt_now_str
+
+    # print(type(df_real.loc[0, 'price']))
+    ma3 = float(price_now)
+    for i in range(0, 2):
+        ma3 += df.loc[i, 'close']
+    ma3 /= 3
+
+    ma5 = float(price_now)
+    for i in range(0, 4):
+        ma5 += df.loc[i, 'close']
+    ma5 /= 5
+
+    delta_real = float(ma3 - ma5)
+    if delta_real >= base_delta_value:
+        print(time_now + ' delta is ' + str(delta_real) + " bigger than " + str(round((delta_real - base_delta_value) * 100 / base_delta_value, 3)) + "%")
+        if delta_real < df.loc[0, 'delta']:
+            print(dt_now_str + ' is hot: ' + str(delta_real) + ' and beichi')
+
+
 def get_ta_data(path_data):
     """
     get base delta value for ma3-ma5
@@ -173,6 +197,7 @@ def get_ta_data(path_data):
         df = ts.pro_bar(ts_code=ts_code_str, adj='qfq', start_date=dt_baseDeltaValue_start_str,
                         end_date=dt_now_str,  freq=freq_label, ma=[3, 5, 55])
         # print(df.head())
+
         df['delta'] = df['ma3'] - df['ma5']
         writer = pd.ExcelWriter(path_data)
         # print(type(df).__name__)
@@ -186,17 +211,21 @@ main start
 """
 get_ta_data(path_data)
 
-base_delta_value, base_high_price = delta_base_3ma_5ma(path_data, dt_baseDeltaValue_start_str, dt_baseDeltaValue_end_str)
+df, base_delta_value, base_high_price = delta_base_3ma_5ma(path_data, dt_baseDeltaValue_start_str, dt_baseDeltaValue_end_str)
 print('base delta is ' + str(base_delta_value) + ' base high is ' + str(base_high_price))
 
 # dt_tst_end = datetime.datetime.strptime('20150811', '%Y%m%d').date()
 dt_tst = dt_baseDeltaValue_end
 
 # while dt_tst <= dt_tst_end:
+
+# df_data = pd.read_excel(path_data, sheet_name='Data', converters={'trade_date': str})
+# if 'ma3' not in list(df_data):
+
 while dt_tst <= dt_now:
     dt_tst_str = dt_tst.strftime('%Y%m%d')
 
-    tend_ta_tst(path_data, dt_tst_str)
+    tend_ta_tst(df, dt_tst_str)
 
     dt_tst = dt_tst + datetime.timedelta(days=1)
 
@@ -204,5 +233,11 @@ print(delta_rate_max_date + ' is max hot: ' + str(delta_rate_max) + '% delta')
 writer_result = pd.ExcelWriter(path_result)
 df_result.to_excel(writer_result)
 writer_result.save()
+
+count = 2
+while count < 3:
+    get_ta_real_data(df, base_delta_value)
+    time.sleep(1)
+    count += 1
 
 #　os.system('d:/催眠曲莫扎特.mp3')
