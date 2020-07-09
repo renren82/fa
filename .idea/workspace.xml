@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="d21cda72-38d2-4f6e-bfbd-d83a5895cc7a" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="d21cda72-38d2-4f6e-bfbd-d83a5895cc7a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resampledata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/waveTa.py" beforeDir="false" afterPath="$PROJECT_DIR$/waveTa.py" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +37,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+<<<<<<< Updated upstream
   <component name="RunManager" selected="Python.tendTa">
+=======
+  <component name="RunManager" selected="Python.resampledata">
+>>>>>>> Stashed changes
     <configuration name="excel_study1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -51,7 +63,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="gendata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="gettdxdata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -63,7 +75,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gendata.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gettdxdata.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -72,7 +84,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="powerdata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="resampledata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -84,7 +96,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/powerdata.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/resampledata.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -137,11 +149,15 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< Updated upstream
+=======
+        <item itemvalue="Python.resampledata" />
+        <item itemvalue="Python.gettdxdata" />
+        <item itemvalue="Python.waveTa" />
+>>>>>>> Stashed changes
         <item itemvalue="Python.tendTa" />
         <item itemvalue="Python.waveTa" />
         <item itemvalue="Python.excel_study1" />
-        <item itemvalue="Python.powerdata" />
-        <item itemvalue="Python.gendata" />
       </list>
     </recent_temporary>
   </component>
@@ -297,33 +313,57 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586154841889" />
+<<<<<<< Updated upstream
     <state width="823" height="147" key="GridCell.Tab.0.bottom" timestamp="1592401634063">
       <screen x="0" y="0" width="1280" height="680" />
+=======
+    <state width="1345" height="171" key="GridCell.Tab.0.bottom" timestamp="1593868115979">
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="823" height="147" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1592401634063" />
     <state width="1259" height="218" key="GridCell.Tab.0.bottom/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
+<<<<<<< Updated upstream
     <state width="1345" height="218" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
     <state width="823" height="147" key="GridCell.Tab.0.center" timestamp="1592401634063">
       <screen x="0" y="0" width="1280" height="680" />
+=======
+    <state width="1345" height="171" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593868115979" />
+    <state width="1345" height="171" key="GridCell.Tab.0.center" timestamp="1593868115979">
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="823" height="147" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1592401634063" />
     <state width="1259" height="218" key="GridCell.Tab.0.center/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
+<<<<<<< Updated upstream
     <state width="1345" height="218" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592224598689" />
     <state width="823" height="147" key="GridCell.Tab.0.left" timestamp="1592401634062">
       <screen x="0" y="0" width="1280" height="680" />
+=======
+    <state width="1345" height="171" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593868115979" />
+    <state width="1345" height="171" key="GridCell.Tab.0.left" timestamp="1593868115979">
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="823" height="147" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1592401634062" />
     <state width="1259" height="218" key="GridCell.Tab.0.left/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
+<<<<<<< Updated upstream
     <state width="1345" height="218" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592224598688" />
     <state width="823" height="147" key="GridCell.Tab.0.right" timestamp="1592401634063">
       <screen x="0" y="0" width="1280" height="680" />
+=======
+    <state width="1345" height="171" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593868115979" />
+    <state width="1345" height="171" key="GridCell.Tab.0.right" timestamp="1593868115979">
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="823" height="147" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1592401634063" />
     <state width="1259" height="218" key="GridCell.Tab.0.right/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
+<<<<<<< Updated upstream
     <state width="1345" height="218" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1592401500572">
       <screen x="0" y="0" width="1280" height="680" />
@@ -335,18 +375,23 @@
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586154855202" />
     <state x="340" y="176" key="com.intellij.ide.util.TipDialog" timestamp="1592401477123">
       <screen x="0" y="0" width="1280" height="680" />
+=======
+    <state width="1345" height="171" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593868115979" />
+    <state x="263" y="112" key="Vcs.Push.Dialog.v2" timestamp="1593868455436">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="112" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593868455436" />
+    <state x="363" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1593862319239">
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
     </state>
     <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1592401477123" />
     <state x="340" y="188" key="com.intellij.ide.util.TipDialog/0.0.1280.728@0.0.1280.728" timestamp="1589624650354" />
-    <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592224319505" />
-    <state x="344" y="24" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1584107862010">
+    <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593862319239" />
+    <state x="412" y="155" key="git4idea.merge.GitPullDialog" timestamp="1592401657262">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="344" y="24" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1584107862010" />
-    <state x="359" y="0" width="647" height="728" key="find.popup" timestamp="1584012770893">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="359" y="0" width="647" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1584012770893" />
+    <state x="412" y="155" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1592401657262" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
