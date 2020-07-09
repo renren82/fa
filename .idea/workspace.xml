@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d21cda72-38d2-4f6e-bfbd-d83a5895cc7a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gettdxdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/gettdxdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resampledata.py" beforeDir="false" afterPath="$PROJECT_DIR$/resampledata.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tendTa.py" beforeDir="false" afterPath="$PROJECT_DIR$/tendTa.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -318,34 +316,34 @@
     </state>
     <state x="301" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594016651328" />
     <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586154841889" />
-    <state width="723" height="162" key="GridCell.Tab.0.bottom" timestamp="1594276965815">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="672" height="179" key="GridCell.Tab.0.bottom" timestamp="1594299324981">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="723" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.bottom/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
-    <state width="723" height="162" key="GridCell.Tab.0.center" timestamp="1594276965815">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="672" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1594299324981" />
+    <state width="672" height="179" key="GridCell.Tab.0.center" timestamp="1594299324980">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="723" height="162" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.center/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592224598689" />
-    <state width="723" height="162" key="GridCell.Tab.0.left" timestamp="1594276965815">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="672" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1594299324980" />
+    <state width="672" height="179" key="GridCell.Tab.0.left" timestamp="1594299324980">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="723" height="162" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.left/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592224598688" />
-    <state width="723" height="162" key="GridCell.Tab.0.right" timestamp="1594276965815">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="672" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1594299324980" />
+    <state width="672" height="179" key="GridCell.Tab.0.right" timestamp="1594299324981">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
     <state width="723" height="162" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.right/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
+    <state width="672" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1594299324981" />
     <state width="629" height="204" key="GridCell.Tab.1.bottom" timestamp="1594027724757">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -377,6 +375,10 @@
     <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594275765618" />
     <state x="340" y="188" key="com.intellij.ide.util.TipDialog/0.0.1280.728@0.0.1280.728" timestamp="1589624650354" />
     <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592224319505" />
+    <state x="412" y="155" key="git4idea.merge.GitPullDialog" timestamp="1594299413201">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="412" y="155" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1594299413201" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1592559413918">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -397,12 +399,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/getdata.py</url>
-          <line>56</line>
+          <line>83</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/getdata.py</url>
-          <line>109</line>
+          <line>144</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -417,7 +419,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tendTa.py</url>
-          <line>174</line>
+          <line>198</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
