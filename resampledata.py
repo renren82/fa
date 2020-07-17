@@ -52,8 +52,10 @@ def resample_formatdata(file_result):
         df = df.reindex(index=df.index[::-1])
         df = df.reset_index(drop=True)
         print(df)
+        df.drop(index=[0], inplace=True)
+        df = df.reset_index(drop=True)
         writer_delta = pd.ExcelWriter(file_result)
-        df.to_excel(writer_delta, index=True)
+        df.to_excel(writer_delta, sheet_name='Data', index=True)
         writer_delta.save()
         writer_delta.close()
 

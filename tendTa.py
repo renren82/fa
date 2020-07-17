@@ -6,9 +6,13 @@ from numpy import *
 import time
 import numpy as np
 
+code_name = 'dfcf'
+period_type = 'D'
+
 #  002714.SZ
-ts_code_str = '000827.SH'
-st_code_str = '000827'
+ts_code_str = '300059.SZ'
+st_code_str = ts_code_str[:-2]
+
 
 path_root = 'H:/'
 path_data = path_root + ts_code_str + '.xlsx'
@@ -21,13 +25,13 @@ dt_tst = datetime.datetime.strptime('20150119', '%Y%m%d').date()
 
 # D W M
 freq_label = 'D'
-dt_baseDeltaValue_start_str = '20180822'
-dt_baseDeltaValue_end_str = '20190614'
+dt_baseDeltaValue_start_str = '20121031'
+dt_baseDeltaValue_end_str = '20160729'
 # dt_baseDeltaValue_start_str = '20140110'
 # dt_baseDeltaValue_end_str = '20140306'
 dt_baseDeltaValue_end =datetime.datetime.strptime(dt_baseDeltaValue_end_str,'%Y%m%d').date()
-print('base date end is ')
-print(dt_baseDeltaValue_end)
+# print('base date end is ')
+# print(dt_baseDeltaValue_end)
 
 delta_rate_max = 0
 delta_rate_max_date = dt_baseDeltaValue_end_str
@@ -37,7 +41,7 @@ delta_5_list = []
 
 row_dic = {'sell_signal_date': ' ', 'delta': 0.0, 'delta_base': 0.0,'delta_%': 0.0, 'high': 0.0, 'high_base': 0.0, 'high_%': 0.0}
 df_result = pd.DataFrame()
-df_result.to_excel(path_result)
+# df_result.to_excel(path_result)
 
 
 def file_exist(path):
@@ -164,12 +168,13 @@ def tend_ta_tst(df_data, dt_str):
 
 def get_ta_real_data(df, base_delta_value):
     global dt_now_str
-    # df_real = ts.get_realtime_quotes(st_code_str)
-    # # print(df_real)
-    # price_now = df_real.loc[0, 'price']
-    # time_now = df_real.loc[0, 'time']
-    price_now = 1535.61
-    time_now = dt_now_str
+    df_real = ts.get_realtime_quotes(st_code_str)
+    print(df_real.loc[0, 'high'])
+    print(df_real.loc[0, 'price'])
+    price_now = df_real.loc[0, 'price']
+    time_now = df_real.loc[0, 'time']
+    # price_now = 1585
+    # time_now = dt_now_str
 
     # print(type(df_real.loc[0, 'price']))
     ma3 = float(price_now)
@@ -183,6 +188,7 @@ def get_ta_real_data(df, base_delta_value):
     ma5 /= 5
 
     delta_real = float(ma3 - ma5)
+    print(delta_real)
     if delta_real >= base_delta_value:
         print(time_now + ' delta is ' + str(delta_real) + " bigger than " + str(round((delta_real - base_delta_value) * 100 / base_delta_value, 3)) + "%")
         if delta_real < df.loc[0, 'delta']:
@@ -209,6 +215,26 @@ def get_ta_data(path_data):
 """
 main start
 """
+df = pd.read_excel('E:/Project/Python/fa_parameters.xlsx', dtype=str)
+for k in df.index.values:
+    if df.loc[k, 'name'] == code_name:
+        ts_code_str = df.loc[k, 'code']
+        st_code_str = ts_code_str[:-3]
+        print(st_code_str)
+        path_data = path_root + ts_code_str + '.xlsx'
+        path_result = path_root + ts_code_str + '_result.xlsx'
+        freq_label = period_type
+        if period_type == 'BM':
+            freq_label = 'M'
+        dt_baseDeltaValue_start_str = df.loc[k, period_type + '_start']
+        # print(dt_baseDeltaValue_start_str)
+        dt_baseDeltaValue_end_str = df.loc[k, period_type + '_end']
+        # dt_baseDeltaValue_start_str = '20140110'
+        # dt_baseDeltaValue_end_str = '20140306'
+        dt_baseDeltaValue_end = datetime.datetime.strptime(dt_baseDeltaValue_end_str, '%Y%m%d').date()
+        print('base date end is ')
+        print(dt_baseDeltaValue_end)
+
 get_ta_data(path_data)
 
 df, base_delta_value, base_high_price = delta_base_3ma_5ma(path_data, dt_baseDeltaValue_start_str, dt_baseDeltaValue_end_str)
@@ -234,10 +260,13 @@ writer_result = pd.ExcelWriter(path_result)
 df_result.to_excel(writer_result)
 writer_result.save()
 
-count = 2
-while count < 3:
-    get_ta_real_data(df, base_delta_value)
-    time.sleep(1)
-    count += 1
+# print(datetime.datetime.now().hour)
+# print(datetime.datetime.now().minute)
+if (datetime.datetime.now().hour <= 16) and (datetime.datetime.now().hour >= 9):
+    count = 0
+    while count < 2:
+        get_ta_real_data(df, base_delta_value)
+        time.sleep(2)
+        count += 1
 
 #　os.system('d:/催眠曲莫扎特.mp3')
