@@ -26,6 +26,7 @@ def df_to_excel(path_data, df_data):
 # print(ta.get_functions())
 # print(ta.get_function_groups())
 
+
 ta_fun = ta.get_function_groups()
 ta_fun.keys()
 
@@ -40,19 +41,19 @@ df_ma = pd.DataFrame(df.close)
 for i in range(len(types)):
     df_ma[types[i]] = ta.MA(df.close, timeperiod=5, matype=i)
 # print(df_ma.tail())
-df_to_excel('ma.xlsx', df_ma)
+df_to_excel('../ma.xlsx', df_ma)
 df_ma.loc['2018-08-01':].plot(figsize=(16, 6))
 ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
-plt.title('上证指数各种类型移动平均线',fontsize=15)
+plt.title('上证指数各种类型移动平均线', fontsize=15)
 plt.xlabel('')
 plt.show()
 
 # 画5、30、120、250指数移动平均线
 N = [5,30,120,250]
 for i in N:
-    df['ma_'+str(i)] = ta.EMA(df.close,timeperiod=i)
+    df['ma_'+str(i)] = ta.EMA(df.close, timeperiod=i)
 df.tail()
 
 df.loc['2014-01-01':, ['close','ma_5','ma_30','ma_120','ma_250']].plot(figsize=(16,6))
@@ -71,7 +72,7 @@ df1['L_line'] = L_line
 df1.tail()
 
 
-df1.loc['2013-01-01':'2014-12-30'].plot(figsize=(16,6))
+df1.loc['2013-01-01':'2014-12-30'].plot(figsize=(16, 6))
 ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
@@ -103,6 +104,6 @@ df2.loc['2018-01-01':'2019-02-21','SAREXT'].plot(figsize=(16,6))
 ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
-plt.title('上证指数的抛物线扩展走势',fontsize=15)
+plt.title('上证指数的抛物线扩展走势', fontsize=15)
 plt.xlabel('')
 plt.show()
