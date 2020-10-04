@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 import talib as ta
 import tushare as ts
 
@@ -13,7 +13,10 @@ mpl.rcParams['font.sans-serif'] = ['SimHei']
 mpl.rcParams['axes.unicode_minus'] = False
 
 
-def df_excel(path_data, df_data):
+def df_to_excel(path_data, df_data):
+    if os.path.exists(path_data):
+        return 1
+
     writer = pd.ExcelWriter(path_data)
     # print(type(df).__name__)
     if type(df_data).__name__ == 'DataFrame':
@@ -37,7 +40,7 @@ df_ma = pd.DataFrame(df.close)
 for i in range(len(types)):
     df_ma[types[i]] = ta.MA(df.close, timeperiod=5, matype=i)
 # print(df_ma.tail())
-df_excel('ma.xlsx', df_ma)
+df_to_excel('ma.xlsx', df_ma)
 df_ma.loc['2018-08-01':].plot(figsize=(16, 6))
 ax = plt.gca()
 ax.spines['right'].set_color('none')
@@ -45,8 +48,9 @@ ax.spines['top'].set_color('none')
 plt.title('上证指数各种类型移动平均线',fontsize=15)
 plt.xlabel('')
 plt.show()
+
 # 画5、30、120、250指数移动平均线
-N=[5,30,120,250]
+N = [5,30,120,250]
 for i in N:
     df['ma_'+str(i)] = ta.EMA(df.close,timeperiod=i)
 df.tail()
