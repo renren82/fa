@@ -6,9 +6,13 @@ from numpy import *
 import time
 import numpy as np
 
+code_name = 'dfcf'
+period_type = 'D'
+
 #  002714.SZ
 ts_code_str = '300059.SZ'
-st_code_str = '300059'
+st_code_str = ts_code_str[:-2]
+
 
 path_root = 'H:/'
 path_data = path_root + ts_code_str + '.xlsx'
@@ -20,14 +24,14 @@ dt_now_str = dt_now.strftime('%Y%m%d')
 dt_tst = datetime.datetime.strptime('20150119', '%Y%m%d').date()
 
 # D W M
-freq_label = 'M'
-dt_baseDeltaValue_start_str = '20121231'
-dt_baseDeltaValue_end_str = '20160930'
+freq_label = 'D'
+dt_baseDeltaValue_start_str = '20180822'
+dt_baseDeltaValue_end_str = '20190614'
 # dt_baseDeltaValue_start_str = '20140110'
 # dt_baseDeltaValue_end_str = '20140306'
 dt_baseDeltaValue_end =datetime.datetime.strptime(dt_baseDeltaValue_end_str,'%Y%m%d').date()
-print('base date end is ')
-print(dt_baseDeltaValue_end)
+# print('base date end is ')
+# print(dt_baseDeltaValue_end)
 
 delta_rate_max = 0
 delta_rate_max_date = dt_baseDeltaValue_end_str
@@ -165,10 +169,11 @@ def tend_ta_tst(df_data, dt_str):
 def get_ta_real_data(df, base_delta_value):
     global dt_now_str
     df_real = ts.get_realtime_quotes(st_code_str)
-    print(df_real)
+    print(df_real.loc[0, 'high'])
+    print(df_real.loc[0, 'price'])
     price_now = df_real.loc[0, 'price']
     time_now = df_real.loc[0, 'time']
-    # price_now = 1535.61
+    # price_now = 1585
     # time_now = dt_now_str
 
     # print(type(df_real.loc[0, 'price']))
