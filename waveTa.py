@@ -142,3 +142,21 @@ plt.show()
 # plt.savefig('./a.png')
 
 
+fig, ax = plt.subplots(1, 1)
+# 共享x轴，生成次坐标轴
+ax_sub = ax.twinx()
+# 绘图
+l1, = ax.plot(df.index[0:show_num], df.close[0:show_num], 'g-', label='close')
+l2, = ax_sub.plot(df.index[0:show_num], df.delta[0:show_num], 'r-', label='delta')
+l3, = ax_sub.plot(df.index[0:show_num], df.power[0:show_num], 'b-', label='power')
+plt.gca().invert_xaxis()
+# 放置图例
+plt.legend(handles=[l1, l2, l3], labels=['close', 'delta', 'power'], loc=0)
+# 设置主次y轴的title
+ax.set_ylabel('close')
+ax_sub.set_ylabel('delta')
+# 设置x轴title
+ax.set_xlabel('index')
+# 设置图片title
+ax.set_title(title_name)
+plt.show()
