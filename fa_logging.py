@@ -3,10 +3,26 @@ import logging.handlers
 import datetime
 
 path_root = 'H:/'
-file_name = 'fa.log'
-file_path = path_root + file_name
+
+
+def fa_logger(name):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+
+    file_path = path_root + name + '.log'
+
+    l_handler = logging.handlers.RotatingFileHandler(file_path, maxBytes=1*1024*1024, backupCount=10)
+    l_handler.setLevel(logging.DEBUG)
+    l_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+
+    logger.addHandler(l_handler)
+
+    return logger
+
 
 if __name__ == '__main__':
+    file_path = path_root + 'fa.log'
+
     logger = logging.getLogger('falogger')
     logger.setLevel(logging.DEBUG)
 
