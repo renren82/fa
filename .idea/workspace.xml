@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d21cda72-38d2-4f6e-bfbd-d83a5895cc7a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bitoparate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seleniumDemo.py" afterDir="false" />
+    <list default="true" id="d21cda72-38d2-4f6e-bfbd-d83a5895cc7a" name="Default Changelist" comment="comment 20200617">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resampledata.py" beforeDir="false" afterPath="$PROJECT_DIR$/resampledata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tendTa.py" beforeDir="false" afterPath="$PROJECT_DIR$/tendTa.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +31,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.tendTa">
+  <component name="RunManager" selected="Python.renameall">
     <configuration name="getdata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,6 +74,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="renameall" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/renameall.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="resampledata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -91,27 +108,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/resampledata.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="reverseTa" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="FA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reverseTa.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,11 +139,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.renameall" />
         <item itemvalue="Python.tendTa" />
         <item itemvalue="Python.resampledata" />
         <item itemvalue="Python.gettdxdata" />
         <item itemvalue="Python.getdata" />
-        <item itemvalue="Python.reverseTa" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +289,28 @@
       <option name="project" value="LOCAL" />
       <updated>1594016653261</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="comment 20200617">
+      <created>1594277078211</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1594277078211</updated>
+    </task>
+    <task id="LOCAL-00019" summary="comment 20200617">
+      <created>1594985132952</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1594985132952</updated>
+    </task>
+    <task id="LOCAL-00020" summary="comment 20200617">
+      <created>1602896514280</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1602896514280</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -310,78 +327,65 @@
     <option name="LAST_COMMIT_MESSAGE" value="comment 20200617" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="233" y="0" key="#Inspections" timestamp="1592401489324">
+    <state x="191" y="0" key="#Notifications" timestamp="1602895789576">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="191" y="0" key="#Notifications/0.0.1197.634@0.0.1197.634" timestamp="1602895789576" />
+    <state x="281" y="0" key="CommitChangelistDialog2" timestamp="1602896866152">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="281" y="0" key="CommitChangelistDialog2/0.0.1197.634@0.0.1197.634" timestamp="1602896866152" />
+    <state x="301" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594985130499" />
+    <state x="113" y="52" key="DiffContextDialog" timestamp="1602896438151">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="113" y="52" key="DiffContextDialog/0.0.1197.634@0.0.1197.634" timestamp="1602896438151" />
+    <state width="1259" height="162" key="GridCell.Tab.0.bottom" timestamp="1600068530794">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="0" key="#Inspections/0.0.1280.680@0.0.1280.680" timestamp="1592401489324" />
-    <state x="301" y="0" key="CommitChangelistDialog2" timestamp="1594016651328">
+    <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1600068530794" />
+    <state width="1259" height="162" key="GridCell.Tab.0.center" timestamp="1600068530794">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="301" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594016651328" />
-    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586154841889" />
-    <state width="723" height="162" key="GridCell.Tab.0.bottom" timestamp="1594276965815">
+    <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1600068530794" />
+    <state width="1259" height="162" key="GridCell.Tab.0.left" timestamp="1600068530794">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="723" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
-    <state width="1259" height="218" key="GridCell.Tab.0.bottom/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
-    <state width="723" height="162" key="GridCell.Tab.0.center" timestamp="1594276965815">
+    <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1600068530794" />
+    <state width="1259" height="162" key="GridCell.Tab.0.right" timestamp="1600068530794">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="723" height="162" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
-    <state width="1259" height="218" key="GridCell.Tab.0.center/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592224598689" />
-    <state width="723" height="162" key="GridCell.Tab.0.left" timestamp="1594276965815">
+    <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1600068530794" />
+    <state x="270" y="67" key="MultipleFileMergeDialog" timestamp="1602896687168">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="270" y="67" key="MultipleFileMergeDialog/0.0.1197.634@0.0.1197.634" timestamp="1602896687168" />
+    <state x="100" y="0" key="SettingsEditor" timestamp="1602897008050">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="100" y="0" key="SettingsEditor/0.0.1197.634@0.0.1197.634" timestamp="1602897008050" />
+    <state x="241" y="85" key="Vcs.Push.Dialog.v2" timestamp="1602896638071">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="241" y="85" key="Vcs.Push.Dialog.v2/0.0.1197.634@0.0.1197.634" timestamp="1602896638071" />
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594985143800" />
+    <state x="318" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1602895676269">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="318" y="164" key="com.intellij.ide.util.TipDialog/0.0.1197.634@0.0.1197.634" timestamp="1602895676269" />
+    <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1600068517277" />
+    <state x="0" y="0" width="638" height="680" key="find.popup" timestamp="1596458995203">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="723" height="162" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
-    <state width="1259" height="218" key="GridCell.Tab.0.left/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592224598688" />
-    <state width="723" height="162" key="GridCell.Tab.0.right" timestamp="1594276965815">
+    <state x="0" y="0" width="638" height="680" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1596458995203" />
+    <state x="330" y="109" key="git4idea.merge.GitPullDialog" timestamp="1602896188315">
+      <screen x="0" y="0" width="1197" height="634" />
+    </state>
+    <state x="330" y="109" key="git4idea.merge.GitPullDialog/0.0.1197.634@0.0.1197.634" timestamp="1602896188315" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1600065226767">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="723" height="162" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
-    <state width="1259" height="218" key="GridCell.Tab.0.right/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
-    <state width="1345" height="218" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
-    <state width="629" height="204" key="GridCell.Tab.1.bottom" timestamp="1594027724757">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="629" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594027724757" />
-    <state width="629" height="204" key="GridCell.Tab.1.center" timestamp="1594027724757">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="629" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1594027724757" />
-    <state width="629" height="204" key="GridCell.Tab.1.left" timestamp="1594027724757">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="629" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1594027724757" />
-    <state width="629" height="204" key="GridCell.Tab.1.right" timestamp="1594027724757">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="629" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1594027724757" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1592401500572">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1592401500572" />
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1594016663238">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594016663238" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586154855202" />
-    <state x="340" y="176" key="com.intellij.ide.util.TipDialog" timestamp="1594275765618">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594275765618" />
-    <state x="340" y="188" key="com.intellij.ide.util.TipDialog/0.0.1280.728@0.0.1280.728" timestamp="1589624650354" />
-    <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592224319505" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1592559413918">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1592559413918" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1600065226767" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -392,18 +396,13 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/vTa.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/getdata.py</url>
-          <line>56</line>
+          <line>61</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/getdata.py</url>
-          <line>109</line>
+          <line>114</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -418,7 +417,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tendTa.py</url>
-          <line>174</line>
+          <line>179</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
