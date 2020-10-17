@@ -3,7 +3,7 @@ import datetime
 import pandas as pd
 
 path_root = 'H:/'
-code_str = 'sz000559'
+code_str = 'sz300059'
 path_file = path_root + code_str + '_5min.xlsx'
 path_result = path_root + code_str + '_60min.xlsx'
 

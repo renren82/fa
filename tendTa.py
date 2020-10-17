@@ -6,7 +6,7 @@ from numpy import *
 import time
 import numpy as np
 
-code_name = 'dfcf'
+code_name = 'cyb'
 period_type = 'D'
 
 #  002714.SZ
@@ -168,13 +168,13 @@ def tend_ta_tst(df_data, dt_str):
 
 def get_ta_real_data(df, base_delta_value):
     global dt_now_str
-    df_real = ts.get_realtime_quotes(st_code_str)
-    print(df_real.loc[0, 'high'])
-    print(df_real.loc[0, 'price'])
-    price_now = df_real.loc[0, 'price']
-    time_now = df_real.loc[0, 'time']
-    # price_now = 1585
-    # time_now = dt_now_str
+    # df_real = ts.get_realtime_quotes(st_code_str)
+    # print(df_real.loc[0, 'high'])
+    # print(df_real.loc[0, 'price'])
+    # price_now = df_real.loc[0, 'price']
+    # time_now = df_real.loc[0, 'time']
+    price_now = 2612
+    time_now = dt_now_str
 
     # print(type(df_real.loc[0, 'price']))
     ma3 = float(price_now)
@@ -226,6 +226,8 @@ for k in df.index.values:
         freq_label = period_type
         if period_type == 'BM':
             freq_label = 'M'
+        if period_type == 'ZD':
+            freq_label = 'D'
         dt_baseDeltaValue_start_str = df.loc[k, period_type + '_start']
         # print(dt_baseDeltaValue_start_str)
         dt_baseDeltaValue_end_str = df.loc[k, period_type + '_end']
@@ -234,6 +236,7 @@ for k in df.index.values:
         dt_baseDeltaValue_end = datetime.datetime.strptime(dt_baseDeltaValue_end_str, '%Y%m%d').date()
         print('base date end is ')
         print(dt_baseDeltaValue_end)
+        delta_rate_max_date = dt_baseDeltaValue_end_str
 
 get_ta_data(path_data)
 
@@ -262,7 +265,7 @@ writer_result.save()
 
 # print(datetime.datetime.now().hour)
 # print(datetime.datetime.now().minute)
-if (datetime.datetime.now().hour <= 16) and (datetime.datetime.now().hour >= 9):
+if (freq_label == "M") or (freq_label == "W") or ((datetime.datetime.now().hour <= 16) and (datetime.datetime.now().hour >= 9)):
     count = 0
     while count < 2:
         get_ta_real_data(df, base_delta_value)

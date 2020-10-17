@@ -84,7 +84,7 @@ def gettdxdaydata(file_path, name):
 
         file_result = path + name + "_d.xlsx"
         writer_delta = pd.ExcelWriter(file_result)
-        df.to_excel(writer_delta, sheet_name='day', index=False)
+        df.to_excel(writer_delta, sheet_name='Data', index=False)
         writer_delta.save()
         writer_delta.close()
 
