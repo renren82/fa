@@ -4,16 +4,17 @@ import tushare as ts
 import pandas as pd
 import matplotlib.pyplot as plt
 
-ts_code_str = 'sh000827_d'
+ts_code = 'sh000827'
+ts_code_str = ts_code + '_D'
 resample_step = 'M'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
-file_result = path_root + ts_code_str + '_' + resample_step + ".xlsx"
+file_result = path_root + ts_code + '_' + resample_step + ".xlsx"
 
 
 def resample_tdxdata(step):
         cycle_df = pd.DataFrame()
-        df = pd.read_excel(path_file, sheet_name='day')
+        df = pd.read_excel(path_file, sheet_name='Sheet1')
         # print(df)
         df.trade_date = pd.to_datetime(df.trade_date, format="%Y%m%d")
         df.set_index('trade_date', inplace=True)
@@ -55,7 +56,7 @@ def resample_formatdata(file_result):
         df.drop(index=[0], inplace=True)
         df = df.reset_index(drop=True)
         writer_delta = pd.ExcelWriter(file_result)
-        df.to_excel(writer_delta, sheet_name='Data', index=True)
+        df.to_excel(writer_delta, sheet_name='Sheet1', index=False)
         writer_delta.save()
         writer_delta.close()
 

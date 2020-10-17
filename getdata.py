@@ -4,6 +4,11 @@ import requests
 import matplotlib.pyplot as plt
 import datetime
 
+# 正常显示画图时出现的中文和负号
+from pylab import mpl
+mpl.rcParams['font.sans-serif'] = ['SimHei']
+mpl.rcParams['axes.unicode_minus'] = False
+
 # codename = 'sz002403'
 # codename = 'sh601989'
 codename = 'sz000559'
@@ -194,4 +199,22 @@ if __name__ == '__main__':
     plt.ylabel('close', size=15)
     # plt.title('title name')
     # plt.rcParams['savefig.dpi'] = 1024
+    plt.show()
+
+    fig, ax = plt.subplots(1, 1)
+    # 共享x轴，生成次坐标轴
+    ax_sub = ax.twinx()
+    # 绘图
+    l1, = ax.plot(df.index, df.close, 'g-', label='close')
+    l2, = ax_sub.plot(df.index, df.delta, 'r-', label='delta')
+    plt.gca().invert_xaxis()
+    # 放置图例
+    plt.legend(handles=[l1, l2], labels=['close', 'delta'], loc=0)
+    # 设置主次y轴的title
+    ax.set_ylabel('close')
+    ax_sub.set_ylabel('delta')
+    # 设置x轴title
+    ax.set_xlabel('index')
+    # 设置图片title
+    ax.set_title(title_name + '示图')
     plt.show()

@@ -35,8 +35,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.bitoparate">
-    <configuration name="bitoparate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.tendTa">
+    <configuration name="getdata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -48,7 +48,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bitoparate.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/getdata.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -99,7 +99,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="seleniumDemo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="reverseTa" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -111,7 +111,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/seleniumDemo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reverseTa.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,11 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.bitoparate" />
         <item itemvalue="Python.tendTa" />
-        <item itemvalue="Python.seleniumDemo" />
         <item itemvalue="Python.resampledata" />
         <item itemvalue="Python.gettdxdata" />
+        <item itemvalue="Python.getdata" />
+        <item itemvalue="Python.reverseTa" />
       </list>
     </recent_temporary>
   </component>
@@ -293,14 +293,7 @@
       <option name="project" value="LOCAL" />
       <updated>1594016653261</updated>
     </task>
-    <task id="LOCAL-00018" summary="comment 20200617">
-      <created>1594277078211</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1594277078211</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -321,36 +314,37 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Inspections/0.0.1280.680@0.0.1280.680" timestamp="1592401489324" />
-    <state x="301" y="0" key="CommitChangelistDialog2" timestamp="1594277076490">
+    <state x="301" y="0" key="CommitChangelistDialog2" timestamp="1594016651328">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="301" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594277076490" />
-    <state width="1259" height="162" key="GridCell.Tab.0.bottom" timestamp="1594885509664">
+    <state x="301" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594016651328" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586154841889" />
+    <state width="723" height="162" key="GridCell.Tab.0.bottom" timestamp="1594276965815">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="1259" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594885509664" />
+    <state width="723" height="162" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.bottom/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
     <state width="1345" height="218" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
-    <state width="1259" height="162" key="GridCell.Tab.0.center" timestamp="1594885509664">
+    <state width="723" height="162" key="GridCell.Tab.0.center" timestamp="1594276965815">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="1259" height="162" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594885509664" />
+    <state width="723" height="162" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.center/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
     <state width="1345" height="218" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592224598689" />
-    <state width="1259" height="162" key="GridCell.Tab.0.left" timestamp="1594885509664">
+    <state width="723" height="162" key="GridCell.Tab.0.left" timestamp="1594276965815">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="1259" height="162" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594885509664" />
+    <state width="723" height="162" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.left/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
     <state width="1345" height="218" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592224598688" />
-    <state width="1259" height="162" key="GridCell.Tab.0.right" timestamp="1594885509664">
+    <state width="723" height="162" key="GridCell.Tab.0.right" timestamp="1594276965815">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.728@0.0.1280.680" timestamp="1588681615307" />
-    <state width="1259" height="162" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594885509664" />
+    <state width="723" height="162" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594276965815" />
     <state width="1259" height="218" key="GridCell.Tab.0.right/0.0.1280.728@0.0.1280.728" timestamp="1592109345397" />
     <state width="1345" height="218" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592224598690" />
     <state width="629" height="204" key="GridCell.Tab.1.bottom" timestamp="1594027724757">
@@ -373,20 +367,21 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1592401500572" />
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1594277084394">
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1594016663238">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594277084394" />
-    <state x="340" y="176" key="com.intellij.ide.util.TipDialog" timestamp="1594985108899">
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594016663238" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586154855202" />
+    <state x="340" y="176" key="com.intellij.ide.util.TipDialog" timestamp="1594275765618">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594985108899" />
+    <state x="340" y="176" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594275765618" />
     <state x="340" y="188" key="com.intellij.ide.util.TipDialog/0.0.1280.728@0.0.1280.728" timestamp="1589624650354" />
     <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592224319505" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1594879427454">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1592559413918">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1594879427454" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1592559413918" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -395,6 +390,11 @@
           <url>file://$PROJECT_DIR$/vTa.py</url>
           <line>111</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vTa.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/getdata.py</url>
@@ -418,7 +418,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tendTa.py</url>
-          <line>179</line>
+          <line>174</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
