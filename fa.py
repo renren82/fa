@@ -15,6 +15,33 @@ dt_now_str = dt_now.strftime('%Y%m%d')
 row_dic = {'high_price_date': ' ','sell_signal_date': ' ', 'delta': 0.0, 'delta_base': 0.0,'delta_%': 0.0, 'high': 0.0, 'high_base': 0.0, 'high_%': 0.0}
 df_result = pd.DataFrame()
 
+
+def compute_power_data(df_data, k_start, k_end):
+    """
+     compute mean surface
+    """
+    i = k_end
+    delta_sum = 0
+    while i != k_start:
+        delta_sum += df_data.loc[i, 'ma3'] - df_data.loc[i, 'ma5']
+        df_data.loc[i, 'power'] = float(delta_sum / (k_end - i+1))
+        # df_data.loc[i, 'power'] = float(delta_sum)
+        i -= 1
+    return 0
+
+
+def power_data(df):
+    k_start = -1
+    k_end = 0
+    k = 0
+    for k in df.index.values:
+        if ((df.loc[k, 'ma3'] >= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] < df.loc[k + 1, 'ma5'])) or (
+                (df.loc[k, 'ma3'] <= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] > df.loc[k + 1, 'ma5'])):
+            k_end = k
+            compute_power_data(df, k_start, k_end)
+            k_start = k_end
+
+
 def get_ta_data(path_data, k, df_param):
     """
     get base delta value for ma3-ma5
@@ -27,7 +54,7 @@ def get_ta_data(path_data, k, df_param):
     # print(df.head())
 
     df['delta'] = round((df['ma3'] - df['ma5']), 4)
-
+    power_data(df)
     writer = pd.ExcelWriter(path_data)
     # print(type(df).__name__)
     if type(df).__name__ == 'DataFrame':
@@ -53,6 +80,7 @@ def delta_base_3ma_5ma(filepath, type, dt_base_delta_start_str, dt_base_delta_en
 
     delta_value_list = []
 
+    l_power_list = []
     # df_data.fillna(np.nan)
     for k in df_data.index.values:
         if df_data.loc[k, 'trade_date'] == dt_base_delta_end_str:
@@ -65,25 +93,27 @@ def delta_base_3ma_5ma(filepath, type, dt_base_delta_start_str, dt_base_delta_en
                 delta = df_data.loc[k+i, 'ma3'] - df_data.loc[k+i, 'ma5']
                 delta = round(delta, 4)
                 delta_value_list.append(delta)
+                l_power_list.append(df_data.loc[k+i, 'power'])
                 if type == 'up':
                     l_price_list.append(df_data.loc[k+i, 'high'])
                 else:
                     l_price_list.append(df_data.loc[k + i, 'low'])
                 i += 1
             if type == 'up':
-                return df_data, float(max(delta_value_list)),  float(max(l_price_list))
+                return df_data, float(max(delta_value_list)),  float(max(l_price_list)), float(max(l_power_list))
             else:
-                return df_data, float(min(delta_value_list)), float(min(l_price_list))
-    return df_data, 0, 0
+                return df_data, float(min(delta_value_list)), float(min(l_price_list)), float(min(l_power_list))
+    return df_data, 0, 0, 0
 
 
-def ta_process(i, df_param, df_data, base_delta_value, base_price):
+def ta_process(i, df_param, df_data, base_delta_value, base_price, base_power):
     dt_tst = datetime.datetime.strptime(df_param.loc[i, 'cur_start'], '%Y%m%d').date()
     delta_max = 0
     delta_max_rate = 0
     delta_max_date = ''
     delta_rate_max = 0
     high_low_price = 0
+    power_max = 0
     high_low_price_date =''
     if df_param.loc[i, 'type'] == 'up':
         df_param.loc[i, 'status'] = 'not hot'
@@ -107,6 +137,8 @@ def ta_process(i, df_param, df_data, base_delta_value, base_price):
                         delta_max = delta_now
                         delta_max_date = dt_tst_str
                         delta_rate = round((delta_now - base_delta_value) * 100 / base_delta_value, 4)
+                    if power_max <= df_data.loc[k, 'power']:
+                        power_max = df_data.loc[k, 'power']
                     if delta_now >= base_delta_value:
                         print(df_param.loc[i, 'name'] + " " + dt_tst_str + ' is hot: ' + str(delta_rate) + '% delta')
                         df_param.loc[i, 'status'] = 'hot'
@@ -150,6 +182,7 @@ def ta_process(i, df_param, df_data, base_delta_value, base_price):
     df_param.loc[i, 'cur_max_delta_date'] = delta_max_date
     df_param.loc[i, 'cur_max_delta'] = delta_max
     df_param.loc[i, 'cur_max_delta_rate'] = str(delta_rate) + "%"
+    df_param.loc[i, 'cur_max_power'] = power_max
 
     # df_param.loc[i, 'cur_high_low_price'] = high_low_price
     # df_param.loc[i, 'cur_high_low_price_date'] = high_low_price_date
@@ -163,12 +196,13 @@ if __name__ == '__main__':
         get_ta_data(path_data, k, df_param)
         dt_baseDeltaValue_start_str = df_param.loc[k, 'compare_start']
         dt_baseDeltaValue_end_str = df_param.loc[k, 'compare_end']
-        df_data, base_delta_value, base_price = delta_base_3ma_5ma(path_data, df_param.loc[k, 'type'], dt_baseDeltaValue_start_str,
+        df_data, base_delta_value, base_price, base_power = delta_base_3ma_5ma(path_data, df_param.loc[k, 'type'], dt_baseDeltaValue_start_str,
                                                                    dt_baseDeltaValue_end_str)
         print(df_param.loc[k, 'name'] + " " + 'base delta is ' + str(base_delta_value) + ' base price is ' + str(base_price))
         df_param.loc[k, 'compare_delta'] = base_delta_value
         df_param.loc[k, 'compare_price'] = base_price
-        ta_process(k, df_param, df_data, base_delta_value, base_price)
+        df_param.loc[k, 'compare_power'] = base_power
+        ta_process(k, df_param, df_data, base_delta_value, base_price, base_power)
 
     writer_result = pd.ExcelWriter(path_root + path_param)
     df_param.to_excel(writer_result, index=False)
