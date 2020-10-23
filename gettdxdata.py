@@ -82,9 +82,9 @@ def gettdxdaydata(file_path, name):
         df = df.reindex(index=df.index[::-1])
         df = df.reset_index(drop=True)
 
-        file_result = path + name + "_d.xlsx"
+        file_result = path + name + "_D.xlsx"
         writer_delta = pd.ExcelWriter(file_result)
-        df.to_excel(writer_delta, sheet_name='day', index=False)
+        df.to_excel(writer_delta, sheet_name='Sheet1', index=False)
         writer_delta.save()
         writer_delta.close()
 
@@ -181,7 +181,7 @@ def gettdxmdata(file_path, name):
 
         file_result = path + name + "_5min.xlsx"
         writer_delta = pd.ExcelWriter(file_result)
-        df.to_excel(writer_delta, sheet_name='5min', index=False)
+        df.to_excel(writer_delta, sheet_name='Sheet1', index=False)
         writer_delta.save()
         writer_delta.close()
 

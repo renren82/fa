@@ -18,7 +18,7 @@ import numpy as np
 
 # ts_code_str = 'sh000016_60min'
 # ts_code_str = 'sh000016_d'
-ts_code_str = 'sz000559_60min'
+ts_code_str = 'sh000827_M'
 path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
 # for 60min
@@ -54,7 +54,7 @@ def compute_back_power_data(df_data, k_start, k_end):
     return 0
 
 
-def power_data(df):
+def power_back_data(df):
     '''
     power from ma3 - ma5
     surface
@@ -71,6 +71,18 @@ def power_data(df):
         k -= 1
 
 
+def power_data(df):
+    k_start = -1
+    k_end = 0
+    k = 0
+    for k in df.index.values:
+        if ((df.loc[k, 'ma3'] >= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] < df.loc[k + 1, 'ma5'])) or (
+                (df.loc[k, 'ma3'] <= df.loc[k, 'ma5']) and (df.loc[k + 1, 'ma3'] > df.loc[k + 1, 'ma5'])):
+            k_end = k
+            compute_power_data(df, k_start, k_end)
+            k_start = k_end
+
+
 if __name__ == '__main__':
 
     df = pd.read_excel(path_file)
@@ -80,9 +92,9 @@ if __name__ == '__main__':
     # df['delta'] = df['ma3'] - df['ma5']
     # df['close_%'] = df['close']/7.5 - 1
 
-    # writer = pd.ExcelWriter(path_result_file)
-    # df.to_excel(writer, sheet_name='history', index=False)
-    # writer.save()
+    writer = pd.ExcelWriter(path_file)
+    df.to_excel(writer, sheet_name='Sheet1', index=False)
+    writer.save()
 
     # df['trade_date'] = pd.to_datetime(df['trade_date'])
     # # x = df.loc[:, 'signal_date'].values
