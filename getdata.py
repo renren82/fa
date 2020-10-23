@@ -84,8 +84,8 @@ def get_sina_data(path, datanum):
 
     df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
                                'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
-    # df = pd.DataFrame({'ts_code' , 'trade_date' , 'open' , 'high' , 'low' , 'close' , 'vol' ,
-    #                    'amount' , 'ma3' , 'ma_v_3' , 'ma5' , 'ma_v_5' })
+    # df = pd.DataFrame({'ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
+    #                    'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5' })
 
     dataurl = 'http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=' +\
               codename + '&scale=' + freq + '&ma=no&datalen=' + datanum
@@ -162,8 +162,8 @@ def get_sina_data(path, datanum):
 
 
 if __name__ == '__main__':
-
-    get_sina_data(path, '256')
+    # 1023 is max
+    get_sina_data(path, '1023')
 
     '''
     plt 
@@ -217,4 +217,27 @@ if __name__ == '__main__':
     ax.set_xlabel('index')
     # 设置图片title
     ax.set_title(title_name + '示图')
+    plt.show()
+
+    # df['trade_date'] = pd.to_datetime(df['trade_date'], format="%Y%m%d%H%M%S")
+    # df = df.set_index('trade_date')
+    # df = df.sort_index()
+    # print(df.head())
+    fig, ax = plt.subplots(1, 1)
+    # 共享x轴，生成次坐标轴
+    ax_sub = ax.twinx()
+    # 绘图
+    l1, = ax.plot(df.index, df.close, 'g-', label='close')
+    l2, = ax_sub.plot(df.index, df.delta, 'r-', label='delta')
+    l3, = ax_sub.plot(df.index, df.power, 'b-', label='power')
+    plt.gca().invert_xaxis()
+    # 放置图例
+    plt.legend(handles=[l1, l2, l3], labels=['close', 'delta', 'power'], loc=0)
+    # 设置主次y轴的title
+    ax.set_ylabel('close')
+    ax_sub.set_ylabel('delta')
+    # 设置x轴title
+    ax.set_xlabel('date')
+    # 设置图片title
+    ax.set_title(title_name)
     plt.show()
