@@ -3,6 +3,7 @@
 """
 利用百度api实现图片文本识别
 author: renxh
+pip install baidu-aip
 """
 
 import glob
@@ -45,13 +46,13 @@ def baiduOCR(picfile, outfile):
 
 if __name__ == "__main__":
 
-    outfile = 'd:/picture/export.txt'
+    outfile = 'h:/picture/export.txt'
 
     if path.exists(outfile):
         os.remove(outfile)
 
     print("图片识别...")
-    for picfile in glob.glob("d:/picture/*"):
+    for picfile in glob.glob("h:/picture/*"):
         baiduOCR(picfile, outfile)
         os.remove(picfile)
     print('图片文本提取结束！文本输出结果位于 %s 文件中。' % outfile)
