@@ -7,9 +7,9 @@ import time
 import numpy as np
 
 path_root = 'H:/'
-st_code_str = '000559.SZ'
-period = 'D'
-base_delta_value = 0.278
+st_code_str = 'sh000827'
+period = 'M'
+base_delta_value = 313.4953
 file_path = path_root + st_code_str + "_" + period + ".xlsx"
 
 dt_now = datetime.datetime.now().date()
@@ -18,11 +18,11 @@ dt_now_str = dt_now.strftime('%Y%m%d')
 
 def get_ta_real_data(st_code_str, df, base_delta_value):
     global dt_now_str
-    df_real = ts.get_realtime_quotes(st_code_str[:-3])
-    price_now = df_real.loc[0, 'price']
-    time_now = df_real.loc[0, 'time']
-    # price_now = 1622
-    # time_now = dt_now_str
+    # df_real = ts.get_realtime_quotes(st_code_str[:-3])
+    # price_now = df_real.loc[0, 'price']
+    # time_now = df_real.loc[0, 'time']
+    price_now = 1712
+    time_now = dt_now_str
     print(time_now)
     print(price_now)
 
