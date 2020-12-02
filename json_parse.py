@@ -1,8 +1,9 @@
 import os
 import json
 
-path_root = 'H:/'
-file_name = 'download.dat'
+path_root = 'H:/QTDownloadRadio/'
+# add [ ] replace { with ,{ then remove first ,
+file_name = 'download.dat' 
 file_path = path_root + file_name
 
 
