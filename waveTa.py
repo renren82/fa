@@ -47,7 +47,7 @@ def get_ta_data(path_data):
     writer = pd.ExcelWriter(path_data)
     # print(type(df).__name__)
     if type(df).__name__ == 'DataFrame':
-        df.to_excel(writer, sheet_name='history', index=False)
+        df.to_excel(writer, sheet_name='Sheet1', index=False)
         writer.save()
 
 
@@ -66,7 +66,7 @@ def compute_power_data(df_data, k_start, k_end):
 
 
 get_ta_data(path_file)
-df = pd.read_excel(path_file, sheet_name='history', converters={'trade_date': str})
+df = pd.read_excel(path_file, sheet_name='Sheet1', converters={'trade_date': str})
 
 k_start = -1
 k_end = 0

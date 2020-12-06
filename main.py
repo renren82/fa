@@ -9,10 +9,12 @@ import gettdxdata
 import resampledata
 import powerdata
 import fa
+import faplt
 
 if __name__ == '__main__':
     # gettdxdata.main()
     # resampledata.main()
     # powerdata.main('sh000827_M')
     # powerdata.main('sh000827_D')
-    fa.main()
+    # fa.main()
+    faplt.main("000559.SZ_D", '20200630')
