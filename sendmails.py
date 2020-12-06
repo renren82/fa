@@ -26,7 +26,7 @@ def mail(contents, subjects):
 
 if __name__ == '__main__':
     contents = "您好！"
-    subjects = "sell attention"
+    subjects = "attention"
     ret = mail(contents, subjects)
     if ret:
         print("邮件发送成功")

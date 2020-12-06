@@ -154,8 +154,10 @@ def gettdxmdata(file_path, name):
             column = {}
 
             column['ts_code'] = name
-            column['trade_date'] = date_format.strftime('%Y-%M-%d') + " " + str(format(hour, '02d')) + ":" \
-                        + str(format(minute, '02d')) + ":00"
+            # column['trade_date'] = date_format.strftime('%Y-%M-%d') + " " + str(format(hour, '02d')) + ":" \
+            #             + str(format(minute, '02d')) + ":00"
+            column['trade_date'] = date_format.strftime('%Y%M%d') + str(format(hour, '02d')) + \
+                              str(format(minute, '02d')) + "00"
             column['vol'] = data_vol[0]
             column['open'] = open_p
             column['close'] = close_p

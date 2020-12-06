@@ -12,7 +12,7 @@ import fa
 import faplt
 
 if __name__ == '__main__':
-    # gettdxdata.main()
+    gettdxdata.main()
     # resampledata.main()
     # powerdata.main('sh000827_M')
     # powerdata.main('sh000827_D')
