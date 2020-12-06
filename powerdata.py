@@ -16,10 +16,10 @@ import numpy as np
 创业板指 sz399006
 """
 
+path_root = 'H:/'
 # ts_code_str = 'sh000016_60min'
 # ts_code_str = 'sh000016_d'
 ts_code_str = 'sh000827_M'
-path_root = 'H:/'
 path_file = path_root + ts_code_str + '.xlsx'
 # for 60min
 show_num = -300
@@ -83,8 +83,11 @@ def power_data(df):
             k_start = k_end
 
 
-if __name__ == '__main__':
-
+# if __name__ == '__main__':
+def main(ts_code):
+    global ts_code_str, path_file
+    ts_code_str = ts_code
+    path_file = path_root + ts_code_str + '.xlsx'
     df = pd.read_excel(path_file)
 
     power_data(df)

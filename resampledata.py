@@ -61,6 +61,7 @@ def resample_formatdata(file_result):
         writer_delta.close()
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def main():
     resample_tdxdata(resample_step)
     resample_formatdata(file_result)

@@ -186,7 +186,8 @@ def gettdxmdata(file_path, name):
         writer_delta.close()
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def main():
     dir_path = base_dir + 'new_tdx/vipdoc/sh/lday/'
     list_file = os.listdir(dir_path)
     for file_name in list_file:

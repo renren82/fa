@@ -5,6 +5,7 @@ import pandas as pd
 from numpy import *
 import time
 import numpy as np
+import math
 
 path_root = 'H:/'
 path_param = 'fa.xlsx'
@@ -189,9 +190,15 @@ def ta_process(i, df_param, df_data, base_delta_value, base_price, base_power):
     print('end')
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def main():
     df_param = pd.read_excel(path_root + path_param, dtype=str)
     for k in df_param.index.values:
+        # print(df_param.loc[k, 'code'])
+        # print(type(df_param.loc[k, 'code']))
+        if type(df_param.loc[k, 'code']) == float and math.isnan(df_param.loc[k, 'code']) is True:
+            # print("continue")
+            continue
         path_data = path_root + df_param.loc[k, 'code'] + '_' + df_param.loc[k, 'period'] + ".xlsx"
         get_ta_data(path_data, k, df_param)
         dt_baseDeltaValue_start_str = df_param.loc[k, 'compare_start']
