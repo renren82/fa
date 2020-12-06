@@ -24,8 +24,9 @@ dt_data_start_str = dt_data_start.strftime('%Y%m%d')
 
 
 def main(code_str, show_start):
-    global ts_code_str, path_file, show_num
+    global ts_code_str, path_file, show_num, title_name
     ts_code_str = code_str
+    title_name = code_str
     path_file = path_root + ts_code_str + '.xlsx'
     df = pd.read_excel(path_file, sheet_name='Sheet1', converters={'trade_date': str})
 
@@ -45,7 +46,8 @@ def main(code_str, show_start):
     plt.gca().invert_xaxis()
     # 放置图例
     # plt.legend(handles=[l1, l2, l3], labels=['close', 'delta', 'power'], loc=0)
-    plt.legend(handles=[l1, l2], labels=['close', 'delta'], loc=0)
+    # plt.legend(handles=[l1, l2], labels=['close', 'delta'], loc=0)
+    plt.legend(handles=[l1, l2], labels=['close', 'delta'], loc='upper left')
     # 设置主次y轴的title
     ax.set_ylabel('close')
     ax_sub.set_ylabel('delta')

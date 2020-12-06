@@ -199,6 +199,10 @@ def main():
         if type(df_param.loc[k, 'code']) == float and math.isnan(df_param.loc[k, 'code']) is True:
             # print("continue")
             continue
+        if df_param.loc[k, 'switch'] == '0':
+            # print("continue")
+            continue
+
         path_data = path_root + df_param.loc[k, 'code'] + '_' + df_param.loc[k, 'period'] + ".xlsx"
         get_ta_data(path_data, k, df_param)
         dt_baseDeltaValue_start_str = df_param.loc[k, 'compare_start']
