@@ -48,18 +48,41 @@ def get_ta_data(path_data, k, df_param):
     get base delta value for ma3-ma5
     """
     if os.path.exists(path_data):
-        return 1
+        right_df = pd.read_excel(path_data, sheet_name='Sheet1', converters={'trade_date': str})
+    else:
+        right_df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
+                                     'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
 
     df = ts.pro_bar(ts_code=df_param.loc[k, 'code'], adj='qfq', start_date=df_param.loc[k, 'start'],
-                    end_date=dt_now_str,  freq=df_param.loc[k, 'period'], ma=[3, 5, 55])
+                    end_date=dt_now_str,  freq=df_param.loc[k, 'period']) # , ma=[3, 5, 55]
     # print(df.head())
-
-    df['delta'] = round((df['ma3'] - df['ma5']), 4)
-    power_data(df)
+    df_new = pd.merge(df, right_df, how='outer')
+    # if df_new.duplicated:
+    df_new.drop_duplicates(subset='trade_date', keep='first', inplace=True)
+    df_new.reset_index(drop=True)
+    # print(df_result.head())
+    df_new['trade_date'] = pd.to_datetime(df_new['trade_date'], format="%Y%m%d")
+    df_new.sort_values(by=['trade_date'], ascending=True, inplace=True, na_position='first')
+    # print(df_result.head())
+    vol3 = df_new.vol.rolling(window=3, center=False).mean()
+    df_new['ma_v_3'] = vol3
+    vol5 = df_new.vol.rolling(window=5, center=False).mean()
+    df_new['ma_v_5'] = vol5
+    ma3 = df_new.close.rolling(window=3, center=False).mean()
+    df_new['ma3'] = ma3
+    ma5 = df_new.close.rolling(window=5, center=False).mean()
+    df_new['ma5'] = ma5
+    df_new['delta'] = round(df_new['ma3'] - df_new['ma5'], 4)
+    df_new['trade_date'] = df_new.trade_date.map(lambda X: X.strftime("%Y%m%d"))
+    df_new = df_new.reindex(index=df_new.index[::-1])
+    df_new = df_new.reset_index(drop=True)
+    # print(df_new.head())
+    # ---------------- -up is data ------------------------
+    power_data(df_new)
     writer = pd.ExcelWriter(path_data)
     # print(type(df).__name__)
-    if type(df).__name__ == 'DataFrame':
-        df.to_excel(writer, sheet_name='Sheet1', index=False)
+    if type(df_new).__name__ == 'DataFrame':
+        df_new.to_excel(writer, sheet_name='Sheet1', index=False)
         writer.save()
 
 

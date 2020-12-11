@@ -24,7 +24,8 @@ def mail(contents, subjects):
     return ret
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def main():
     contents = "您好！"
     subjects = "attention"
     ret = mail(contents, subjects)
