@@ -287,8 +287,8 @@ def rt_process():
     base_price = 8.01
     print(code_str + " " + 'base delta is ' + str(base_delta) + ' base price is ' + str(base_price))
 
-    if df_new.loc[0, 'low'] <= 7.86:
-        print(str(df_new.loc[0, 'low']) + " will cold ready to buy half!")
+    if df_new.loc[0, 'low'] <= 7.51:
+        print(str(df_new.loc[0, 'low']) + " will cold ready to stop kui!")
         # os.system('E:/Tools/sound.wav')
         if mail_cnt < 5:
             mail_cnt += 1
@@ -296,8 +296,8 @@ def rt_process():
     else:
         mail_cnt = 0
 
-    if df_new.loc[0, 'delta'] <= -0.015:
-        print(str(df_new.loc[0, 'delta']) + " will cold ready to buy half!")
+    if df_new.loc[0, 'delta'] <= -0.018:
+        print(str(df_new.loc[0, 'delta']) + " will cold ready to stop kui!")
         if mail_cnt < 5:
             mail_cnt += 1
             sendmails.main()
