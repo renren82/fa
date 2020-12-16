@@ -14,7 +14,7 @@ code_str_std = "002403.SZ"
 freq = '5'
 # num = "1023"
 num = "256"
-file_path = path_root + code_str_std + freq + '.xlsx'
+file_path = path_root + code_str_std + "_" + freq + '.xlsx'
 # file_out_path = path_root + code_str_std + "_" + freq + '_new.xlsx'
 file_out_path = path_root + code_str_std + "_" + freq + '.xlsx'
 
@@ -323,7 +323,7 @@ def rt_process():
 if __name__ == '__main__':
     while 1:
         rt_process()
-        faplt.main(code_str_std + "_" + freq, '20201204093000')
+        faplt.main(code_str_std + "_" + freq, '20201204093500')
         # time.sleep(0.5)
         time.sleep(5)
         if datetime.datetime.now().hour > 15:
