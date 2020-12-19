@@ -53,9 +53,14 @@ def get_ta_data(path_data, k, df_param):
         right_df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
                                      'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
 
-    df = ts.pro_bar(ts_code=df_param.loc[k, 'code'], adj='qfq', start_date=df_param.loc[k, 'start'],
+    if df_param.loc[k, 'name'] != "zzhb":
+        df = ts.pro_bar(ts_code=df_param.loc[k, 'code'], adj='qfq', start_date=df_param.loc[k, 'start'],
                     end_date=dt_now_str,  freq=df_param.loc[k, 'period']) # , ma=[3, 5, 55]
-    # print(df.head())
+        # print(df.head())
+    else:
+        df = pd.DataFrame(columns=['ts_code', 'trade_date', 'open', 'high', 'low', 'close', 'vol',
+                                     'amount', 'ma3', 'ma_v_3', 'ma5', 'ma_v_5'])
+
     df_new = pd.merge(df, right_df, how='outer')
     # if df_new.duplicated:
     df_new.drop_duplicates(subset='trade_date', keep='first', inplace=True)
