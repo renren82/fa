@@ -14,7 +14,7 @@ code_str_std = "002403.SZ"
 freq = '5'
 # num = "1023"
 num = "256"
-file_path = path_root + code_str_std + freq + '.xlsx'
+file_path = path_root + code_str_std + "_" + freq + '.xlsx'
 # file_out_path = path_root + code_str_std + "_" + freq + '_new.xlsx'
 file_out_path = path_root + code_str_std + "_" + freq + '.xlsx'
 
@@ -287,7 +287,8 @@ def rt_process():
     base_price = 8.01
     print(code_str + " " + 'base delta is ' + str(base_delta) + ' base price is ' + str(base_price))
 
-    if df_new.loc[0, 'low'] <= 7.51:
+    # -3%
+    if df_new.loc[0, 'low'] <= 7.66:
         print(str(df_new.loc[0, 'low']) + " will cold ready to stop kui!")
         # os.system('E:/Tools/sound.wav')
         if mail_cnt < 5:
@@ -296,7 +297,8 @@ def rt_process():
     else:
         mail_cnt = 0
 
-    if df_new.loc[0, 'delta'] <= -0.018:
+    # can't lower before segment
+    if df_new.loc[0, 'delta'] <= -0.02467:
         print(str(df_new.loc[0, 'delta']) + " will cold ready to stop kui!")
         if mail_cnt < 5:
             mail_cnt += 1
@@ -323,7 +325,7 @@ def rt_process():
 if __name__ == '__main__':
     while 1:
         rt_process()
-        faplt.main(code_str_std + "_" + freq, '20201204093000')
+        faplt.main(code_str_std + "_" + freq, '20201120093500')
         # time.sleep(0.5)
         time.sleep(5)
         if datetime.datetime.now().hour > 15:
