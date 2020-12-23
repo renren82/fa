@@ -210,7 +210,8 @@ def ta_process(i, df_param, df_data, base_delta_value, base_price, base_power):
     # print(delta_rate_max_date + ' is max hot: ' + str(delta_rate_max) + '% delta')
     df_param.loc[i, 'cur_max_delta_date'] = delta_max_date
     df_param.loc[i, 'cur_max_delta'] = delta_max
-    df_param.loc[i, 'cur_max_delta_rate'] = str(delta_rate) + "%"
+    if delta_max > 0:
+        df_param.loc[i, 'cur_max_delta_rate'] = str(delta_rate) + "%"
     df_param.loc[i, 'cur_max_power'] = power_max
 
     # df_param.loc[i, 'cur_high_low_price'] = high_low_price
