@@ -288,7 +288,7 @@ def rt_process():
     print(code_str + " " + 'base delta is ' + str(base_delta) + ' base price is ' + str(base_price))
 
     # -3%
-    if df_new.loc[0, 'low'] <= 7.66:
+    if df_new.loc[0, 'low'] <= 7.5:
         print(str(df_new.loc[0, 'low']) + " will cold ready to stop kui!")
         # os.system('E:/Tools/sound.wav')
         if mail_cnt < 5:
