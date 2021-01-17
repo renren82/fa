@@ -13,7 +13,7 @@ dt_start = dt_now - datetime.timedelta(days=360*4)
 dt_start_str = dt_start.strftime('%Y%m%d')
 
 
-def get_area_data(industry):
+def get_area_data(df_list, industry):
     """
     get base delta value for ma3-ma5
     """
@@ -21,7 +21,6 @@ def get_area_data(industry):
     #     return 1
     industry_value = 0
     industry_cnt = 0
-    df_list = pd.read_excel(path_root + "list.xlsx")
 
     for k in df_list.index.values:
         if df_list.loc[k, 'industry'] == industry:
@@ -29,8 +28,8 @@ def get_area_data(industry):
             # freq D W M
             df = ts.pro_bar(ts_code=df_list.loc[k, 'ts_code'], adj='qfq', start_date=dt_start_str,
                             end_date=dt_now_str, freq='D', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 800])
-            print(df.head())
-            time.sleep(1)
+            # print(df.head())
+            time.sleep(0.5)
 
             if df.loc[0, 'ma5'] > df.loc[0, 'close'] >= df.loc[0, 'ma3']:
                 industry_value += 3
@@ -56,8 +55,29 @@ def get_area_data(industry):
                 industry_value += 800
             industry_cnt += 1
 
-    print(industry_value/industry_cnt)
+    return industry_value/industry_cnt
 
 
 if __name__ == '__main__':
-    get_area_data("汽车配件")
+    df_xuan = pd.DataFrame(columns=['industry', 'value'])
+    df_list = pd.read_excel(path_root + "list.xlsx", converters={'symbol': str})
+
+    table = pd.pivot_table(df_list, index=["industry"])
+    # print(table.head())
+    # writer_delta = pd.ExcelWriter("H:/tst.xlsx")
+    # table.to_excel(writer_delta, sheet_name='Sheet1', index=True)
+    # writer_delta.save()
+    # writer_delta.close()
+
+    for k in table.index.values:
+        value = get_area_data(df_list, k)
+        column = {}
+        column['industry'] = k
+        column['value'] = value
+        print(column)
+        df_xuan = df_xuan.append(column, ignore_index=True)
+
+    writer_delta = pd.ExcelWriter(path_root + "xuan.xlsx")
+    df_xuan.to_excel(writer_delta, sheet_name='Sheet1', index=False)
+    writer_delta.save()
+    writer_delta.close()
