@@ -5,6 +5,7 @@ import tushare as ts
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import sendmails
 
 path_root = 'H:/'
 dt_now = datetime.datetime.now().date()
@@ -28,8 +29,8 @@ def get_area_data(df_list, industry):
             # freq D W M
             df = ts.pro_bar(ts_code=df_list.loc[k, 'ts_code'], adj='qfq', start_date=dt_start_str,
                             end_date=dt_now_str, freq='D', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 800])
-            # print(df.head())
-            time.sleep(0.5)
+            print(df.head())
+            time.sleep(1)
 
             if df.loc[0, 'ma5'] > df.loc[0, 'close'] >= df.loc[0, 'ma3']:
                 industry_value += 3
@@ -81,3 +82,5 @@ if __name__ == '__main__':
     df_xuan.to_excel(writer_delta, sheet_name='Sheet1', index=False)
     writer_delta.save()
     writer_delta.close()
+
+    sendmails.main()
