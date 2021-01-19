@@ -1,5 +1,8 @@
 import tushare as ts
 import pandas as pd
+import os
+import datetime
+
 
 """
 数据频度 ：支持分钟(min)/日(D)/周(W)/月(M)K线，其中1min表示1分钟（类推1/5/15/30/60分钟） ，默认D
@@ -71,3 +74,32 @@ writer_delta = pd.ExcelWriter('H:/list.xlsx')
 data.to_excel(writer_delta, sheet_name='Sheet1', index=False)
 writer_delta.save()
 writer_delta.close()
+
+
+dt_1 = datetime.datetime.strptime('20190611', '%Y%m%d').date()
+# 20190504
+# 20190426
+dt_2 = datetime.datetime.strptime('20190504', '%Y%m%d').date()
+
+print((dt_1 - dt_2).days)
+
+df = pd.read_excel("qms_new.xlsx", sheet_name='Sheet1')
+print(df["装车车型"].mode())
+print(df["装车车号"].mode())
+
+x_list = []
+for i in range(0, 100):
+    x_list.append(i)
+x_list.append(40)
+x_list.append(50)
+x_list.append(40)
+
+print(df["value"].mean()) # pingjunzhi
+df = pd.DataFrame(x_list, columns=["value"])
+print(df["value"].mode()) # zhongshu
+print(df["value"].std()) # biaozhuncha
+print(df["value"].var()) # fangcha
+print(df["value"].median()) # zhongweishu
+print(df["value"].min()) # min
+print(df["value"].max()) # max
+print(df["value"].sum()) # sum
