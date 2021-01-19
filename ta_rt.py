@@ -9,14 +9,17 @@ import faplt
 import sendmails
 
 path_root = "H:/"
-code_str = 'sz002403'
-code_str_std = "002403.SZ"
+# code_str = 'sz002403'
+code_str = 'sz000559'
+# code_str = 'sh000827'
+# code_str_std = "002403.SZ"
+# code_str_std = code_str[2:] + ".SZ"
 freq = '5'
 # num = "1023"
 num = "256"
-file_path = path_root + code_str_std + "_" + freq + '.xlsx'
+file_path = path_root + code_str + "_" + freq + '.xlsx'
 # file_out_path = path_root + code_str_std + "_" + freq + '_new.xlsx'
-file_out_path = path_root + code_str_std + "_" + freq + '.xlsx'
+file_out_path = path_root + code_str + "_" + freq + '.xlsx'
 
 mail_cnt = 0
 
@@ -325,7 +328,8 @@ def rt_process():
 if __name__ == '__main__':
     while 1:
         rt_process()
-        faplt.main(code_str_std + "_" + freq, '20201120093500')
+        # faplt.main(code_str + "_" + freq, '20201028093500')
+        faplt.main(code_str + "_" + freq, '20210106093500')
         # time.sleep(0.5)
         time.sleep(5)
         if datetime.datetime.now().hour > 15:
