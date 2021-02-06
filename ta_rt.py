@@ -15,8 +15,8 @@ code_str = 'sz000559'
 # code_str_std = "002403.SZ"
 # code_str_std = code_str[2:] + ".SZ"
 freq = '5'
-# num = "1023"
-num = "256"
+num = "1023"
+# num = "256"
 file_path = path_root + code_str + "_" + freq + '.xlsx'
 # file_out_path = path_root + code_str_std + "_" + freq + '_new.xlsx'
 file_out_path = path_root + code_str + "_" + freq + '.xlsx'
@@ -296,7 +296,7 @@ def rt_process():
         # os.system('E:/Tools/sound.wav')
         if mail_cnt < 5:
             mail_cnt += 1
-            sendmails.main()
+            # sendmails.main()
     else:
         mail_cnt = 0
 
@@ -305,7 +305,7 @@ def rt_process():
         print(str(df_new.loc[0, 'delta']) + " will cold ready to stop kui!")
         if mail_cnt < 5:
             mail_cnt += 1
-            sendmails.main()
+            # sendmails.main()
             os.system('E:/Tools/sound.wav')
     else:
         mail_cnt = 0
@@ -329,7 +329,8 @@ if __name__ == '__main__':
     while 1:
         rt_process()
         # faplt.main(code_str + "_" + freq, '20201028093500')
-        faplt.main(code_str + "_" + freq, '20210106093500')
+        # faplt.main(code_str + "_" + freq, '20201230093500')
+        faplt.main(code_str + "_" + freq, '20210128145500')
         # time.sleep(0.5)
         time.sleep(5)
         if datetime.datetime.now().hour > 15:
