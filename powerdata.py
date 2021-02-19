@@ -151,7 +151,6 @@ def main(ts_code):
     # plt.gca().invert_xaxis()
     plt.legend()
 
-
-    plt.show()
+    # plt.show()
     # plt.savefig('./a.png', dpi=1000)
     # plt.savefig('./a.png')
