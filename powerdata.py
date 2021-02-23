@@ -106,51 +106,51 @@ def main(ts_code):
     #
     # df = df.set_index('trade_date')
 
-    max_index = max(df.index.values)
-
-    plt.subplot(311)
-    df[show_num:]['delta'].plot()
-    # df['power'].plot(kind='bar', color='r')
-    df[show_num:]['power'].plot()
-    # df['close_%'].plot()
-
-    #                   记号形状       颜色           点的大小    设置标签
-    # plt.scatter(x, y, marker = 'x',color = 'red', s = 40 ,label = 'First')
-
-    # plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5), arrowprops=dict(facecolor='black', shrink=0.05),)
-    # plt.text(0.5, 1, 'put some text')
-
-    plt.grid(True)
-    plt.ylabel('power', size=15)
-    plt.title(ts_code_str)
-    # plt.gca().invert_xaxis()
-    plt.legend()
-
-    plt.subplot(312)
-    # df[10:].close.plot()
-    # df['close'].plot()
-    # df.close.plot()
-    df[show_num:]['close'].plot()
-
-    plt.grid(True)
-    plt.ylabel('close', size=15)
+    # max_index = max(df.index.values)
+    #
+    # plt.subplot(311)
+    # df[show_num:]['delta'].plot()
+    # # df['power'].plot(kind='bar', color='r')
+    # df[show_num:]['power'].plot()
+    # # df['close_%'].plot()
+    #
+    # #                   记号形状       颜色           点的大小    设置标签
+    # # plt.scatter(x, y, marker = 'x',color = 'red', s = 40 ,label = 'First')
+    #
+    # # plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5), arrowprops=dict(facecolor='black', shrink=0.05),)
+    # # plt.text(0.5, 1, 'put some text')
+    #
+    # plt.grid(True)
+    # plt.ylabel('power', size=15)
     # plt.title(ts_code_str)
-    # plt.rcParams['savefig.dpi'] = 1024
-    # plt.gca().invert_xaxis()
-    plt.legend()
-
-    plt.subplot(313)
-    # df[10:].close.plot()
-    # df['close'].plot()
-    # df.close.plot()
-    df[show_num:]['ma_v_3'].plot(color='g')
-    plt.grid(True)
-    plt.ylabel('ma_v_3', size=15)
-    # plt.title('title name')
-    # plt.rcParams['savefig.dpi'] = 1024
-    # plt.gca().invert_xaxis()
-    plt.legend()
-
+    # # plt.gca().invert_xaxis()
+    # plt.legend()
+    #
+    # plt.subplot(312)
+    # # df[10:].close.plot()
+    # # df['close'].plot()
+    # # df.close.plot()
+    # df[show_num:]['close'].plot()
+    #
+    # plt.grid(True)
+    # plt.ylabel('close', size=15)
+    # # plt.title(ts_code_str)
+    # # plt.rcParams['savefig.dpi'] = 1024
+    # # plt.gca().invert_xaxis()
+    # plt.legend()
+    #
+    # plt.subplot(313)
+    # # df[10:].close.plot()
+    # # df['close'].plot()
+    # # df.close.plot()
+    # df[show_num:]['ma_v_3'].plot(color='g')
+    # plt.grid(True)
+    # plt.ylabel('ma_v_3', size=15)
+    # # plt.title('title name')
+    # # plt.rcParams['savefig.dpi'] = 1024
+    # # plt.gca().invert_xaxis()
+    # plt.legend()
+    #
     # plt.show()
-    # plt.savefig('./a.png', dpi=1000)
-    # plt.savefig('./a.png')
+    # # plt.savefig('./a.png', dpi=1000)
+    # # plt.savefig('./a.png')
