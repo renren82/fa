@@ -13,6 +13,40 @@ dt_now_str = dt_now.strftime('%Y%m%d')
 dt_start = dt_now - datetime.timedelta(days=360*4)
 dt_start_str = dt_start.strftime('%Y%m%d')
 save_gupiao_data = 1
+xuan = 0
+
+
+def get_stock_list():
+    pro = ts.pro_api()
+
+    # 查询当前所有正常上市交易的股票列表
+    # is_hs	str	N	是否沪深港通标的，N否 H沪股通 S深股通
+    # list_status	str	N	上市状态： L上市 D退市 P暂停上市，默认L
+    # exchange	str	N	交易所 SSE上交所 SZSE深交所 HKEX港交所(未上线)
+    # 名称	类型	描述
+    # ts_code	str	TS代码
+    # symbol	str	股票代码
+    # name	str	股票名称
+    # area	str	所在地域
+    # industry	str	所属行业
+    # fullname	str	股票全称
+    # enname	str	英文全称
+    # market	str	市场类型 （主板/中小板/创业板/科创板）
+    # exchange	str	交易所代码
+    # curr_type	str	交易货币
+    # list_status	str	上市状态： L上市 D退市 P暂停上市
+    # list_date	str	上市日期
+    # delist_date	str	退市日期
+    # is_hs	str	是否沪深港通标的，N否 H沪股通 S深股通
+
+    data = pro.query('stock_basic', exchange='', list_status='L',
+                     fields='ts_code,symbol,name,area,industry,list_date, market, is_hs')
+
+    writer_list = pd.ExcelWriter("H:/list-" + dt_now_str + ".xlsx")
+    data.to_excel(writer_list, sheet_name='Sheet1', index=False)
+    writer_list.save()
+    writer_list.close()
+
 
 def get_area_data(df_list, industry):
     """
@@ -29,6 +63,10 @@ def get_area_data(df_list, industry):
             # freq D W M
             df = ts.pro_bar(ts_code=df_list.loc[k, 'ts_code'], adj='qfq', start_date=dt_start_str,
                             end_date=dt_now_str, freq='D', ma=[3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 800])
+
+            if df is None:
+                continue
+
             print(df.head())
             time.sleep(1)
             if 'ma3' not in list(df):
@@ -61,10 +99,12 @@ def get_area_data(df_list, industry):
 
             v_list.append(df_list.loc[k, 'ts_code'])
             v_list.append(df_list.loc[k, 'name'])
+            v_list.append(df.loc[0, 'close'])
             v_list.append(industry_value)
+            v_list.append(df.loc[0, 'pct_chg'])
             x_list.append(v_list)
 
-    df_op = pd.DataFrame(x_list, columns=["ts_code", "name", "value"])
+    df_op = pd.DataFrame(x_list, columns=["ts_code", "name", "close", "value", "pct_chg"])
     # print(df["value"].mode())  # zhongshu
     # print(df["value"].std())  # biaozhuncha
     # print(df["value"].var())  # fangcha
@@ -83,8 +123,10 @@ def get_area_data(df_list, industry):
 
 
 if __name__ == '__main__':
+    get_stock_list()
+
     df_xuan = pd.DataFrame(columns=['industry', 'mode', "mean", "median", "min", "max", "std", "var"])
-    df_list = pd.read_excel(path_root + "list.xlsx", converters={'symbol': str})
+    df_list = pd.read_excel(path_root + "list-" + dt_now_str + ".xlsx", converters={'symbol': str})
 
     table = pd.pivot_table(df_list, index=["industry"])
     # print(table.head())
@@ -94,19 +136,21 @@ if __name__ == '__main__':
     # writer_delta.close()
 
     column = {}
-    # for k in table.index.values:
-    #     column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
-    #     column['industry'] = k
-    #     print(column)
-    #     df_xuan = df_xuan.append(column, ignore_index=True)
-    #
-    # writer_delta = pd.ExcelWriter(path_root + "xuan.xlsx")
-    # df_xuan.to_excel(writer_delta, sheet_name='Sheet1', index=False)
-    # writer_delta.save()
-    # writer_delta.close()
-    # sendmails.main()
+    if xuan == 1:
+        for k in table.index.values:
+            column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
+            column['industry'] = k
+            print(column)
+            df_xuan = df_xuan.append(column, ignore_index=True)
 
-    k = "家用电器"
-    column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
-    print(column)
+        writer_delta = pd.ExcelWriter(path_root + "xuan-" + dt_now_str + ".xlsx")
+        df_xuan.to_excel(writer_delta, sheet_name='Sheet1', index=False)
+        writer_delta.save()
+        writer_delta.close()
+        sendmails.main()
+
+    if xuan == 0:
+        k = "乳制品"
+        column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
+        print(column)
 
