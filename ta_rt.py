@@ -33,6 +33,14 @@ df_result = pd.DataFrame()
 action_dir = {'k': 0, 'action': ""}
 action_list = []
 
+
+def ta_rt_init(code_str, freq ):
+    global file_path, file_out_path
+    file_path = path_root + code_str + "_" + freq + '.xlsx'
+    # file_out_path = path_root + code_str_std + "_" + freq + '_new.xlsx'
+    file_out_path = path_root + code_str + "_" + freq + '.xlsx'
+
+
 def delta_base_3ma_5ma(df_data, type, dt_base_delta_start_str, dt_base_delta_end_str):
     """
     get base delta and base high
@@ -246,7 +254,7 @@ def file_exist(path):
 
 
 # if __name__ == '__main__':
-def rt_process():
+def rt_process(code_str, freq):
     global mail_cnt
     #get  config
     df_param = pd.read_excel(path_root + path_param, dtype=str)
@@ -325,12 +333,15 @@ def rt_process():
     print(log_time + " turn end")
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def ta_rt_main(code_str, freq, time_start):
+    ta_rt_init(code_str, freq)
     while 1:
-        rt_process()
+        rt_process(code_str, freq)
         # faplt.main(code_str + "_" + freq, '20201028093500')
         # faplt.main(code_str + "_" + freq, '20201230093500')
-        faplt.main(code_str + "_" + freq, '20210128145500')
+        # faplt.main(code_str + "_" + freq, '20210128145500')
+        faplt.main(code_str + "_" + freq, time_start)
         # time.sleep(0.5)
         time.sleep(5)
         if datetime.datetime.now().hour > 15:
