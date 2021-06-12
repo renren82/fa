@@ -12,11 +12,11 @@ import fa
 import faplt
 
 if __name__ == '__main__':
-    # gettdxdata.main()
-    # resampledata.main()
-    # powerdata.main('sh000827_M')
-    # powerdata.main('sh000827_D')
-    # fa.main()
+    gettdxdata.main()
+    resampledata.main()
+    powerdata.main('sh000827_M')
+    powerdata.main('sh000827_D')
+    fa.main()
     faplt.main("000559.SZ_D", '20200115')
     # faplt.main("601633.SH_D", '20200629')
     faplt.main("002403.SZ_D", '20190807')
