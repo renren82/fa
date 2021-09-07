@@ -12,7 +12,8 @@ mpl.rcParams['axes.unicode_minus'] = False
 # codename = 'sz002403'
 # codename = 'sh601989'
 codename = 'sz000559'
-title_name = 'wxqc'
+# codename = 'sh000827'
+title_name = 'title'
 freq = '30'
 dt_now = datetime.datetime.now().date()
 dt_now_str = dt_now.strftime('%Y%m%d')
@@ -163,7 +164,7 @@ def get_sina_data(path, datanum):
 
 if __name__ == '__main__':
     # 1023 is max
-    get_sina_data(path, '1023')
+    get_sina_data(path, '256')
 
     '''
     plt 
@@ -217,6 +218,8 @@ if __name__ == '__main__':
     ax.set_xlabel('index')
     # 设置图片title
     ax.set_title(title_name + '示图')
+    plt.legend()
+    plt.grid(True)
     plt.show()
 
     # df['trade_date'] = pd.to_datetime(df['trade_date'], format="%Y%m%d%H%M%S")
@@ -240,4 +243,6 @@ if __name__ == '__main__':
     ax.set_xlabel('date')
     # 设置图片title
     ax.set_title(title_name)
+    plt.legend()
+    plt.grid(True)
     plt.show()
