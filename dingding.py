@@ -14,7 +14,7 @@ code_str = 'sz000559'
 # code_str = 'sh000827'
 # code_str_std = "002403.SZ"
 # code_str_std = code_str[2:] + ".SZ"
-freq = '5'
+freq = '30'
 # num = "1023"
 num = "256"
 file_path = path_root + code_str + "_" + freq + '.xlsx'
@@ -164,8 +164,10 @@ def get_data(codename, freq, datanum):
     ma3 = df_data.close.rolling(window=3, center=False).mean()
     df_data['ma3'] = ma3
     ma5 = df_data.close.rolling(window=5, center=False).mean()
+    ma13 = df_data.close.rolling(window=13, center=False).mean()
     df_data['ma5'] = ma5
     df_data['delta'] = df_data['ma3'] -df_data['ma5']
+    df_data['ma13'] = ma13
     # df_data.to_excel(path, index=False)
     return df_data
 
@@ -257,18 +259,20 @@ def file_exist(path):
 
 
 class dingding_man:
-    def __init__(self, code_str, freq, num, price):
+    def __init__(self, code_str, freq, num, ma_price, base_price):
         self.mail = 0
         self.code_str = code_str
         self.freq = freq
         self.num = num
-        self.price = price
+        self.ma_price = ma_price
+        self.base_price = base_price
 
     def up(self):
         df = get_data(self.code_str, self.freq, self.num)
         id = df.index.values.max()
-        # print(id)
-        if df.loc[id, 'close'] >= self.price:
+        menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price) / 89
+        print(menkan)
+        if df.loc[id, 'close'] >= (menkan-0.02):
             # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
             snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " up available"
             print(snd_str)
@@ -281,8 +285,9 @@ class dingding_man:
     def down(self):
             df = get_data(self.code_str, self.freq, self.num)
             id = df.index.values.max()
-            # print(id)
-            if df.loc[id, 'close'] <= self.price:
+            menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price)/13
+            print(menkan)
+            if df.loc[id, 'close'] <= (menkan+0.02):
                 # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
                 snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " down available"
                 print(snd_str)
@@ -292,12 +297,13 @@ class dingding_man:
             else:
                 self.mail = 0
 
+
 if __name__ == '__main__':
-    up1 = dingding_man(code_str, freq, num, 7)
-    down1 = dingding_man("sz002797", freq, num, 7.5)
+    up1 = dingding_man(code_str, freq, num, 8.22, 4.08)
+    down1 = dingding_man("sz002797", freq, num, 7.35, 6.88)
     while 1:
         up1.up()
         down1.down()
-        time.sleep(1)
+        time.sleep(2)
         if datetime.datetime.now().hour > 15:
             break
