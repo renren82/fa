@@ -7,6 +7,7 @@ import time
 import json
 import faplt
 import sendmails
+import talib as ta
 
 path_root = "H:/"
 # code_str = 'sz002403'
@@ -259,19 +260,20 @@ def file_exist(path):
 
 
 class dingding_man:
-    def __init__(self, code_str, freq, num, ma_price, base_price):
+    def __init__(self, code_str, freq, num, ma_price, base_price, n):
         self.mail = 0
         self.code_str = code_str
         self.freq = freq
         self.num = num
         self.ma_price = ma_price
         self.base_price = base_price
+        self.zhouqi = n
 
     def up(self):
         df = get_data(self.code_str, self.freq, self.num)
         id = df.index.values.max()
-        menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price) / 89
-        print(menkan)
+        menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price) / self.zhouqi
+        # print(menkan)
         if df.loc[id, 'close'] >= (menkan-0.02):
             # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
             snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " up available"
@@ -285,9 +287,9 @@ class dingding_man:
     def down(self):
             df = get_data(self.code_str, self.freq, self.num)
             id = df.index.values.max()
-            menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price)/13
+            menkan = self.ma_price + (df.loc[id, 'close'] - self.base_price)/ self.zhouqi
             print(menkan)
-            if df.loc[id, 'close'] <= (menkan+0.02):
+            if df.loc[id, 'close'] <= (menkan):
                 # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
                 snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " down available"
                 print(snd_str)
@@ -297,13 +299,41 @@ class dingding_man:
             else:
                 self.mail = 0
 
+    def boll_lower(self):
+        df = get_data(self.code_str, self.freq, self.num)
+        # print(df.close[-20:])
+        uper, middle, lower = ta.BBANDS(df.close[-20:].values,  timeperiod=20,
+                # number of non-biased standard deviations from the mean
+                nbdevup=2,
+                nbdevdn=2,
+                # Moving average type: simple moving average here
+                matype=0)
+        # print(str(uper[-1]) + " " + str(middle[-1]) + " " + str(lower[-1]))
+
+        if df.close.values[-1] <= (lower[-1]):
+            # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
+            snd_str = self.code_str + " " + str(df.close.values[-1]) + " boll lower available"
+            print(snd_str)
+            if self.mail < 1:
+                self.mail += 1
+                sendmails.main(snd_str)
+        else:
+            self.mail = 0
+
 
 if __name__ == '__main__':
-    up1 = dingding_man(code_str, freq, num, 8.22, 4.08)
-    down1 = dingding_man("sz002797", freq, num, 7.35, 6.88)
+    up1 = dingding_man(code_str, freq, num, 8.22, 4.08, 89) # 89M
+    down1 = dingding_man("sz002797", "60", "21", 7.39, 6.86, 13)
+    down2 = dingding_man("sz000559", "60", "21", 0, 0, 0)
     while 1:
-        up1.up()
-        down1.down()
+        try:
+            # up1.up()
+            down1.boll_lower()
+            down2.boll_lower()
+        except Exception as r:
+            print('未知错误 %s' % r)
+            pass
+
         time.sleep(2)
         if datetime.datetime.now().hour > 15:
             break
