@@ -345,15 +345,15 @@ if __name__ == '__main__':
     down2 = dingding_man("sz000559", "60", "21", 0, 0, 0)
     fang1 = dingding_man("sz002797", "30", "256", 0, 0, 0)
     while 1:
-        # try:
-        # up1.up()
-        # down1.boll_lower()
-        # down2.boll_lower()
-        fang1.baolifang_afterjuewangdown("20210903140000", "20210917140000")
+        try:
+            up1.up()
+            down1.boll_lower()
+            down2.boll_lower()
+            fang1.baolifang_afterjuewangdown("20210903140000", "20210917140000")
 
-        # except Exception as r:
-        #     print('未知错误 %s' % r)
-        #     pass
+        except Exception as r:
+            print('未知错误 %s' % r)
+            pass
 
         time.sleep(2)
         if datetime.datetime.now().hour > 15:
