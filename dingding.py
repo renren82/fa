@@ -65,29 +65,29 @@ def delta_base_3ma_5ma(df_data, type, dt_base_delta_start_str, dt_base_delta_end
     #  dt_base_delta_start).days
     l_price_list = []
     delta_value_list = []
-    l_power_list = []
+    # l_power_list = []
     # df_data.fillna(np.nan）
     for k in df_data.index.values:
-        if df_data.loc[k, 'trade_date'] == dt_base_delta_end_str:
+        if df_data.loc[k, 'trade_date'] == dt_base_delta_start_str :
             i=0
             # print（dt_base_delta_start_str)
-            while df_data.loc[k+i, 'trade_date'] != dt_base_delta_start_str:
+            while df_data.loc[k+i, 'trade_date'] != dt_base_delta_end_str:
                 # print(df_data.loc[k+i, 'ma5'])
                 # if df_data.loc[k+i, 'ma5'].isna:
                 #     return 0
                 delta = df_data.loc[k+i, 'ma3'] - df_data.loc[k+i, 'ma5']
                 delta = round(delta, 4)
                 delta_value_list.append(delta)
-                l_power_list.append(df_data.loc[k+i, 'power'])
+                # l_power_list.append(df_data.loc[k+i, 'power'])
                 if type == 'up' or type == 'waveup':
                     l_price_list.append(df_data.loc[k+i, 'high'])
                 else:
                     l_price_list.append(df_data.loc[k+i, 'low'])
                 i+=1
             if type == 'up' or type == 'waveup':
-                return float(max(delta_value_list)),  float(max(l_price_list)), float(max(l_power_list))
+                return float(max(delta_value_list)),  float(max(l_price_list)) # , float(max(l_power_list)）
             else:
-                return float(min(delta_value_list)), float(min(l_price_list)), float(min(l_power_list))
+                return float(min(delta_value_list)), float(min(l_price_list))  #, float(min(l_power_list))
     return 0, 0, 0
 
 def back_enough_method(df, start_k, end_k):
@@ -320,19 +320,40 @@ class dingding_man:
         else:
             self.mail = 0
 
+    def baolifang_afterjuewangdown(self, base_start, base_end):
+        df = get_data(self.code_str, self.freq, self.num)
+        previousdelta, lowprice = delta_base_3ma_5ma(df, "down", base_start, base_end)
+        # print(previousdelta)
+        # print(lowprice)
+        base = ((-previousdelta)*0.9)
+        # print(base)
+        for k in df.index.values:
+            if df.loc[k, 'trade_date'] == base_end:
+                for i in range(k, len(df.index.values)):
+                    if (df.loc[i, 'ma3']-df.loc[i, 'ma5']) >= base:
+                        snd_str = self.code_str + " " + str(df.loc[i, 'trade_date']) + " " + str(df.loc[i, 'close']) + " hot available"
+                        print(snd_str)
+                        if self.mail < 1:
+                            self.mail += 1
+                            sendmails.main(snd_str)
+                    else:
+                        self.mail = 0
 
 if __name__ == '__main__':
     up1 = dingding_man(code_str, freq, num, 8.22, 4.08, 89) # 89M
     down1 = dingding_man("sz002797", "60", "21", 7.39, 6.86, 13)
     down2 = dingding_man("sz000559", "60", "21", 0, 0, 0)
+    fang1 = dingding_man("sz002797", "30", "256", 0, 0, 0)
     while 1:
-        try:
-            # up1.up()
-            down1.boll_lower()
-            down2.boll_lower()
-        except Exception as r:
-            print('未知错误 %s' % r)
-            pass
+        # try:
+        # up1.up()
+        # down1.boll_lower()
+        # down2.boll_lower()
+        fang1.baolifang_afterjuewangdown("20210903140000", "20210917140000")
+
+        # except Exception as r:
+        #     print('未知错误 %s' % r)
+        #     pass
 
         time.sleep(2)
         if datetime.datetime.now().hour > 15:
