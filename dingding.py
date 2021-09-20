@@ -8,6 +8,7 @@ import json
 import faplt
 import sendmails
 import talib as ta
+import math
 
 path_root = "H:/"
 # code_str = 'sz002403'
@@ -269,6 +270,13 @@ class dingding_man:
         self.base_price = base_price
         self.zhouqi = n
 
+        self.compare_delta = 0
+        self.pre_delta = 0
+        self.pre_ma3 = 0
+        self.pre_ma5 = 0
+        self.pre3_close = 0
+        self.pre5_close = 0
+
     def up(self):
         df = get_data(self.code_str, self.freq, self.num)
         id = df.index.values.max()
@@ -339,17 +347,64 @@ class dingding_man:
                     else:
                         self.mail = 0
 
+    def zhudiup_init(self, name, level):
+        df_param = pd.read_excel("h:/fa.xlsx", dtype=str)
+        for k in df_param.index.values:
+            # print(df_param.loc[k, 'code'])
+            # print(type(df_param.loc[k, 'code']))
+            if type(df_param.loc[k, 'code']) == float and math.isnan(df_param.loc[k, 'code']) is True:
+                # print("continue")
+                continue
+            if df_param.loc[k, 'code'] == name and df_param.loc[k, 'level'] == level:
+                self.compare_delta = float(df_param.loc[k, 'compare_delta'])
+
+        df_data = pd.read_excel("h:/"+name+"_D.xlsx", converters={'trade_date': str})
+        if 'ma3' not in list(df_data):
+            return 0
+        self.pre_delta = df_data.loc[0, "delta"]
+        self.pre_ma3 = df_data.loc[0, "ma3"]
+        self.pre_ma5 = df_data.loc[0, "ma5"]
+        self.pre3_close = df_data.loc[2, "close"]
+        self.pre5_close = df_data.loc[4, "close"]
+
+    def zhudiup_beichi(self):
+        df = get_data(self.code_str, self.freq, self.num)
+        id = df.index.values.max()
+        ma3 = self.pre_ma3 + (df.loc[id, 'close'] - self.pre3_close) / 3
+        ma5 = self.pre_ma5 + (df.loc[id, 'close'] - self.pre5_close) / 5
+        delta = ma3 - ma5
+        print(delta)
+        if self.pre_delta >= self.compare_delta and delta < self.pre_delta:
+            # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
+            snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " beichi available"
+            print(snd_str)
+            if self.mail < 1:
+                self.mail += 1
+                sendmails.main(snd_str)
+        elif delta >= self.compare_delta:
+            snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " hot available"
+            print(snd_str)
+            if self.mail < 1:
+                self.mail += 1
+                sendmails.main(snd_str)
+        else:
+            self.mail = 0
+
+
 if __name__ == '__main__':
     up1 = dingding_man(code_str, freq, num, 8.22, 4.08, 89) # 89M
     down1 = dingding_man("sz002797", "60", "21", 7.39, 6.86, 13)
     down2 = dingding_man("sz000559", "60", "21", 0, 0, 0)
     fang1 = dingding_man("sz002797", "30", "256", 0, 0, 0)
+    beichi1 = dingding_man("sz002403", "30", "5", 0, 0, 0)
+    beichi1.zhudiup_init("002403.SZ", "筑底段")
     while 1:
         try:
-            up1.up()
-            down1.boll_lower()
-            down2.boll_lower()
+            # up1.up()
+            # down1.boll_lower()
+            # down2.boll_lower()
             fang1.baolifang_afterjuewangdown("20210903140000", "20210917140000")
+            beichi1.zhudiup_beichi()
 
         except Exception as r:
             print('未知错误 %s' % r)
