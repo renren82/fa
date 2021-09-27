@@ -13,7 +13,7 @@ dt_now_str = dt_now.strftime('%Y%m%d')
 dt_start = dt_now - datetime.timedelta(days=360*4)
 dt_start_str = dt_start.strftime('%Y%m%d')
 save_gupiao_data = 1
-xuan = 0
+xuan = 1
 
 
 def get_stock_list():
@@ -138,16 +138,20 @@ if __name__ == '__main__':
     column = {}
     if xuan == 1:
         for k in table.index.values:
-            column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
-            column['industry'] = k
-            print(column)
-            df_xuan = df_xuan.append(column, ignore_index=True)
+            try:
+                column['mode'], column["mean"], column["median"], column["min"], column["max"], column["std"], column["var"] = get_area_data(df_list, k)
+                column['industry'] = k
+                print(column)
+                df_xuan = df_xuan.append(column, ignore_index=True)
+            except Exception as r:
+                print('未知错误 %s' % r)
+                pass
 
         writer_delta = pd.ExcelWriter(path_root + "xuan-" + dt_now_str + ".xlsx")
         df_xuan.to_excel(writer_delta, sheet_name='Sheet1', index=False)
         writer_delta.save()
         writer_delta.close()
-        sendmails.main()
+        sendmails.main("xuan is ok")
 
     if xuan == 0:
         k = "乳制品"

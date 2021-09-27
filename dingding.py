@@ -334,7 +334,7 @@ class dingding_man:
         # print(previousdelta)
         # print(lowprice)
         base = ((-previousdelta)*0.9)
-        # print(base)
+        print(base)
         for k in df.index.values:
             if df.loc[k, 'trade_date'] == base_end:
                 for i in range(k, len(df.index.values)):
@@ -357,7 +357,7 @@ class dingding_man:
                 continue
             if df_param.loc[k, 'code'] == name and df_param.loc[k, 'level'] == level:
                 self.compare_delta = float(df_param.loc[k, 'compare_delta'])
-
+        print(self.compare_delta)
         df_data = pd.read_excel("h:/"+name+"_D.xlsx", converters={'trade_date': str})
         if 'ma3' not in list(df_data):
             return 0
@@ -368,43 +368,50 @@ class dingding_man:
         self.pre5_close = df_data.loc[4, "close"]
 
     def zhudiup_beichi(self):
-        df = get_data(self.code_str, self.freq, self.num)
-        id = df.index.values.max()
-        ma3 = self.pre_ma3 + (df.loc[id, 'close'] - self.pre3_close) / 3
-        ma5 = self.pre_ma5 + (df.loc[id, 'close'] - self.pre5_close) / 5
-        delta = ma3 - ma5
-        print(delta)
-        if self.pre_delta >= self.compare_delta and delta < self.pre_delta:
-            # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
-            snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " beichi available"
-            print(snd_str)
-            if self.mail < 1:
-                self.mail += 1
-                sendmails.main(snd_str)
-        elif delta >= self.compare_delta:
-            snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " hot available"
-            print(snd_str)
-            if self.mail < 1:
-                self.mail += 1
-                sendmails.main(snd_str)
-        else:
-            self.mail = 0
+        if datetime.datetime.now().hour > 14 and datetime.datetime.now().minute >= 0:
+            df = get_data(self.code_str, self.freq, self.num)
+            id = df.index.values.max()
+            ma3 = self.pre_ma3 + (df.loc[id, 'close'] - self.pre3_close) / 3
+            ma5 = self.pre_ma5 + (df.loc[id, 'close'] - self.pre5_close) / 5
+            delta = ma3 - ma5
+            print(delta)
+            if self.pre_delta >= self.compare_delta and delta < self.pre_delta:
+                # log_time = datetime.datetime.now().strftime("%H:%M:%S.%f")
+                snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " " + str(delta) + " beichi available"
+                print(snd_str)
+                if self.mail < 1:
+                    self.mail += 1
+                    sendmails.main(snd_str)
+            elif delta >= self.compare_delta:
+                snd_str = self.code_str + " " + str(df.loc[id, 'close']) + " " + str(delta) + " hot available"
+                print(snd_str)
+                if self.mail < 1:
+                    self.mail += 1
+                    sendmails.main(snd_str)
+            else:
+                self.mail = 0
 
 
 if __name__ == '__main__':
     up1 = dingding_man(code_str, freq, num, 8.22, 4.08, 89) # 89M
     down1 = dingding_man("sz002797", "60", "21", 7.39, 6.86, 13)
     down2 = dingding_man("sz000559", "60", "21", 0, 0, 0)
-    fang1 = dingding_man("sz002797", "30", "256", 0, 0, 0)
-    beichi1 = dingding_man("sz002403", "30", "5", 0, 0, 0)
-    beichi1.zhudiup_init("002403.SZ", "筑底段")
+    d1cy = dingding_man("sz002797", "30", "256", 0, 0, 0)
+    asd = dingding_man("sz002403", "30", "5", 0, 0, 0)
+    asd.zhudiup_init("002403.SZ", "筑底段")
+    dycy = dingding_man("sz002797", "30", "5", 0, 0, 0)
+    dycy.zhudiup_init("002797.SZ", "筑底段2")
+    zgzg = dingding_man("sh601989", "30", "5", 0, 0, 0)
+    zgzg.zhudiup_init("601989.SH", "筑底段2")
     while 1:
         try:
             # up1.up()
             # down1.boll_lower()
             # down2.boll_lower()
-            fang1.baolifang_afterjuewangdown("20210903140000", "20210917140000")
-            beichi1.zhudiup_beichi()
+            d1cy.baolifang_afterjuewangdown("20210903140000", "20210917140000")
+            asd.zhudiup_beichi()
+            dycy.zhudiup_beichi()
+            zgzg.zhudiup_beichi()
 
         except Exception as r:
             print('未知错误 %s' % r)
