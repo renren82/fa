@@ -19,6 +19,7 @@ if __name__ == '__main__':
         # powerdata.main('sh000827_M')
         # powerdata.main('sh000827_D')
         fa.main()
+        faplt.main("002797.SZ_D", '20210510')
         faplt.main("000559.SZ_D", '20200115')
         # faplt.main("000559.SZ_15min", '202106211445')
         # faplt.main("601633.SH_D", '20200629')
@@ -27,6 +28,7 @@ if __name__ == '__main__':
         faplt.main("300750.SZ_D", '20190611')
         # faplt.main("300059.SZ_D", "20200204")
         # faplt.main("000738.SZ_D", "20200401")
+
         # faplt.main("600893.SH_D", '20200615')
         faplt.main("601012.SH_D", '20200820')
         # faplt.main("603128.SH_D", '20181019')

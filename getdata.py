@@ -11,10 +11,15 @@ mpl.rcParams['axes.unicode_minus'] = False
 
 # codename = 'sz002403'
 # codename = 'sh601989'
-codename = 'sz000559'
+# codename = 'sz000559'
+codename = 'sz002797'
+# codename = 'sz000690'
 # codename = 'sh000827'
 title_name = 'title'
-freq = '30'
+# freq = '30'
+freq = '5'
+# 1023 is max
+num = '1023'
 dt_now = datetime.datetime.now().date()
 dt_now_str = dt_now.strftime('%Y%m%d')
 path = 'H:/' + codename + '_' + freq + 'm_' + dt_now_str + '.xlsx'
@@ -163,8 +168,8 @@ def get_sina_data(path, datanum):
 
 
 if __name__ == '__main__':
-    # 1023 is max
-    get_sina_data(path, '256')
+
+    get_sina_data(path, num)
 
     '''
     plt 
@@ -180,27 +185,27 @@ if __name__ == '__main__':
 
     # df['close_%'] = df['close']
 
-    plt.subplot(211)
-    df['delta'].plot()
-    # df['power'].plot(kind='bar', color='r')
-    df['power'].plot()
-#    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
-
-    plt.gca().invert_xaxis()
-    plt.legend()
-    plt.grid(True)
-    plt.ylabel('delta', size=15)
-    plt.title(title_name)
-
-    plt.subplot(212)
-    df['close'].plot()
-    plt.gca().invert_xaxis()
-    plt.legend()
-    plt.grid(True)
-    plt.ylabel('close', size=15)
-    # plt.title('title name')
-    # plt.rcParams['savefig.dpi'] = 1024
-    plt.show()
+#     plt.subplot(211)
+#     df['delta'].plot()
+#     # df['power'].plot(kind='bar', color='r')
+#     df['power'].plot()
+# #    plt.annotate('signal point', xy=(175, -0.05), xytext=(180, -0.1), arrowprops=dict(facecolor='red', shrink=0.05), )
+#
+#     plt.gca().invert_xaxis()
+#     plt.legend()
+#     plt.grid(True)
+#     plt.ylabel('delta', size=15)
+#     plt.title(title_name)
+#
+#     plt.subplot(212)
+#     df['close'].plot()
+#     plt.gca().invert_xaxis()
+#     plt.legend()
+#     plt.grid(True)
+#     plt.ylabel('close', size=15)
+#     # plt.title('title name')
+#     # plt.rcParams['savefig.dpi'] = 1024
+#     plt.show()
 
     fig, ax = plt.subplots(1, 1)
     # 共享x轴，生成次坐标轴
@@ -226,23 +231,23 @@ if __name__ == '__main__':
     # df = df.set_index('trade_date')
     # df = df.sort_index()
     # print(df.head())
-    fig, ax = plt.subplots(1, 1)
-    # 共享x轴，生成次坐标轴
-    ax_sub = ax.twinx()
-    # 绘图
-    l1, = ax.plot(df.index, df.close, 'g-', label='close')
-    l2, = ax_sub.plot(df.index, df.delta, 'r-', label='delta')
-    l3, = ax_sub.plot(df.index, df.power, 'b-', label='power')
-    plt.gca().invert_xaxis()
-    # 放置图例
-    plt.legend(handles=[l1, l2, l3], labels=['close', 'delta', 'power'], loc=0)
-    # 设置主次y轴的title
-    ax.set_ylabel('close')
-    ax_sub.set_ylabel('delta')
-    # 设置x轴title
-    ax.set_xlabel('date')
-    # 设置图片title
-    ax.set_title(title_name)
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    # fig, ax = plt.subplots(1, 1)
+    # # 共享x轴，生成次坐标轴
+    # ax_sub = ax.twinx()
+    # # 绘图
+    # l1, = ax.plot(df.index, df.close, 'g-', label='close')
+    # l2, = ax_sub.plot(df.index, df.delta, 'r-', label='delta')
+    # l3, = ax_sub.plot(df.index, df.power, 'b-', label='power')
+    # plt.gca().invert_xaxis()
+    # # 放置图例
+    # plt.legend(handles=[l1, l2, l3], labels=['close', 'delta', 'power'], loc=0)
+    # # 设置主次y轴的title
+    # ax.set_ylabel('close')
+    # ax_sub.set_ylabel('delta')
+    # # 设置x轴title
+    # ax.set_xlabel('date')
+    # # 设置图片title
+    # ax.set_title(title_name)
+    # plt.legend()
+    # plt.grid(True)
+    # plt.show()
